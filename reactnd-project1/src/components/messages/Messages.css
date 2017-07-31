@@ -1,0 +1,44 @@
+.messages-class {
+    background: rgba(91,138,93, 0.8);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 20%;
+    margin-top: 5%;
+    border-radius: 20px;
+}
+
+.messages-hide {
+    display: none;
+}
+
+.text-class {
+    margin-left: 20px;
+}
+
+.header-class {
+    text-align: center;    
+}
+
+@media (max-width: 425px) {
+    .messages-class {
+        width: 40%;
+        margin-top: 20%;
+    }
+
+    .text-class {
+        margin-left: 25px;
+    }    
+}
+
+@media (max-width: 768px) {
+    .messages-class {
+        width: 40%;
+        margin-top: 10%;
+    }
+
+    .text-class {
+        margin-left: 25px;
+    }    
+}

@@ -38,8 +38,7 @@ class Reads extends Component {
         const newBook = Object.assign({}, actualBook, { shelf: futureShelf });
 
         // Server update
-        bookApi.update(book, futureShelf).then(res => {
-            console.log(res);
+        bookApi.update(book, futureShelf).then(res => {            
             //Local update
             if (book.shelf !== 'none') {
                 allBook = allBook.filter(b => (b.id !== book.id));
@@ -50,7 +49,8 @@ class Reads extends Component {
                 currentlyReading: separateBook.currentlyReading,
                 wantToRead: separateBook.wantToRead,
                 read: separateBook.read,
-            });
+            });            
+            this.props.changeMessages('The book ' + book.title + ' has been successfully updated!', 'Update!');
         });
 
     }
