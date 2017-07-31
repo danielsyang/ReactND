@@ -43,7 +43,7 @@ class App extends Component {
                         <Reads changeMessages={this.onChangeMessages} />
                     )} />
 
-                    <Route exact path='/add' render={() => (
+                    <Route exact path='/search' render={() => (
                         <AddRead />
                     )} />
 

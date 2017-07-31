@@ -10,7 +10,6 @@ class Messages extends Component {
             this.props.hideMessage();
         }, 1000);
 
-
     }
 
     render() {
