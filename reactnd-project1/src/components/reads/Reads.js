@@ -62,7 +62,7 @@ class Reads extends Component {
                 <ReadStatus title='Want To read' books={this.state.wantToRead} booksState={this.onChangeBookState} />
                 <ReadStatus title='Read' books={this.state.read} booksState={this.onChangeBookState} />
                 <div className="open-search">
-                    <Link to='/add'>
+                    <Link to='/search'>
                         <div >Add a book</div>
                     </Link>
                 </div>

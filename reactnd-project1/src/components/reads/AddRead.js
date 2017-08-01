@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './AddRead.css';
 import * as bookApi from '../../services/BookApi';
 import ReadStatus from './ReadStatus';
@@ -37,7 +38,8 @@ class AddRead extends Component {
 
     onBookChange = (book, shelf) => {
         bookApi.update(book, shelf).then(res => {
-            console.log(res);
+            const message = 'The book ' + book.title + ' has been updated to "' + shelf + '" shelf.';
+            this.props.changeMessages(message, 'Updated');
         });
     }
 
@@ -58,6 +60,10 @@ class AddRead extends Component {
             </div>
         )
     }
+}
+
+AddRead.PropTypes = {
+    changeMessages: PropTypes.func.isRequired,
 }
 
 export default AddRead;

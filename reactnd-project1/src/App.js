@@ -44,7 +44,7 @@ class App extends Component {
                     )} />
 
                     <Route exact path='/search' render={() => (
-                        <AddRead />
+                        <AddRead changeMessages={this.onChangeMessages} />
                     )} />
 
                     <Messages message={this.state.message} title={this.state.title} show={this.state.show} hideMessage={this.hideMessage} />

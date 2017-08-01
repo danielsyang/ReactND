@@ -8,7 +8,7 @@ class Messages extends Component {
         console.log('curioso')       
         setTimeout(() => {
             this.props.hideMessage();
-        }, 1000);
+        }, 2000);
 
     }
 
