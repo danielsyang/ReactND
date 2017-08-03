@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 import * as bookApi from '../../services/BookApi';
 
 class Reads extends Component {
-    constructor() {
-        super();
-        this.state = {
-            currentlyReading: [],
-            wantToRead: [],
-            read: []
-        };
-    }
+
+    state = {
+        currentlyReading: [],
+        wantToRead: [],
+        read: []
+    };
+
 
     separateReadList(allBook) {
         return {
@@ -38,7 +37,7 @@ class Reads extends Component {
         const newBook = Object.assign({}, actualBook, { shelf: futureShelf });
 
         // Server update
-        bookApi.update(book, futureShelf).then(res => {            
+        bookApi.update(book, futureShelf).then(res => {
             //Local update
             if (book.shelf !== 'none') {
                 allBook = allBook.filter(b => (b.id !== book.id));
@@ -49,7 +48,7 @@ class Reads extends Component {
                 currentlyReading: separateBook.currentlyReading,
                 wantToRead: separateBook.wantToRead,
                 read: separateBook.read,
-            });            
+            });
             this.props.changeMessages('The book ' + book.title + ' has been successfully updated!', 'Update!');
         });
 
@@ -58,9 +57,15 @@ class Reads extends Component {
     render() {
         return (
             <div className='list-books-content'>
-                <ReadStatus title='Currently Reading' books={this.state.currentlyReading} booksState={this.onChangeBookState} />
-                <ReadStatus title='Want To read' books={this.state.wantToRead} booksState={this.onChangeBookState} />
-                <ReadStatus title='Read' books={this.state.read} booksState={this.onChangeBookState} />
+                <ReadStatus title='Currently Reading'
+                    books={this.state.currentlyReading}
+                    booksState={this.onChangeBookState} />
+                <ReadStatus title='Want To read'
+                    books={this.state.wantToRead}
+                    booksState={this.onChangeBookState} />
+                <ReadStatus title='Read'
+                    books={this.state.read}
+                    booksState={this.onChangeBookState} />
                 <div className="open-search">
                     <Link to='/search'>
                         <div >Add a book</div>

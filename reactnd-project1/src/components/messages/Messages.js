@@ -4,8 +4,7 @@ import './Messages.css';
 
 class Messages extends Component {
 
-    componentDidUpdate() { 
-        console.log('curioso')       
+    componentDidUpdate() {
         setTimeout(() => {
             this.props.hideMessage();
         }, 2000);

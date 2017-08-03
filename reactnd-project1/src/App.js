@@ -9,14 +9,13 @@ import Messages from './components/messages/Messages';
 import './App.css';
 
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            message: '',
-            title: '',
-            show: false,
-        };
-    }
+
+    state = {
+        message: '',
+        title: '',
+        show: false,
+    };
+
 
     onChangeMessages = (message, title) => {
         this.setState({
@@ -47,7 +46,13 @@ class App extends Component {
                         <AddRead changeMessages={this.onChangeMessages} />
                     )} />
 
-                    <Messages message={this.state.message} title={this.state.title} show={this.state.show} hideMessage={this.hideMessage} />
+                    <Messages
+                        message={this.state.message}
+                        title={this.state.title}
+                        show={this.state.show}
+                        hideMessage={this.hideMessage}
+                    />
+
                 </div>
             </div>
         );

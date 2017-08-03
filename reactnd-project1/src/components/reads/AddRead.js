@@ -6,13 +6,11 @@ import * as bookApi from '../../services/BookApi';
 import ReadStatus from './ReadStatus';
 
 class AddRead extends Component {
-    constructor() {
-        super();
-        this.state = {
-            termSearch: '',
-            listSearch: []
-        };
-    }
+
+    state = {
+        termSearch: '',
+        listSearch: []
+    };
 
     onInputChange = (event) => {
         const term = event.target.value;
@@ -52,11 +50,18 @@ class AddRead extends Component {
                     </Link>
 
                     <div className="search-books-input-wrapper">
-                        <input type="text" placeholder="Search by title or author" value={this.state.termSearch} onChange={this.onInputChange} />
+                        <input type="text"
+                            placeholder="Search by title or author"
+                            value={this.state.termSearch}
+                            onChange={this.onInputChange} />
                     </div>
                 </div>
 
-                {this.state.termSearch.length !== 0 && (<ReadStatus title='Result' books={this.state.listSearch} booksState={this.onBookChange} />)}
+                {this.state.termSearch.length !== 0 &&
+                    (<ReadStatus title='Result'
+                        books={this.state.listSearch}
+                        booksState={this.onBookChange} />)
+                }
             </div>
         )
     }
