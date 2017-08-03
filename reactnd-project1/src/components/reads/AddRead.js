@@ -17,12 +17,16 @@ class AddRead extends Component {
         this.setState({
             termSearch: event.target.value
         });
-        this.searchImplicit(term);
+        if (term !== '') {
+            this.searchImplicit(term);
+        }
+        
     };
 
     searchImplicit(term) {
         bookApi.search(term, 5).then(res => {
-            if (res.error === undefined) {
+            console.log(res);
+            if (res !== undefined && res.error === undefined && res.error !== 'empty query') {
                 this.setState({
                     listSearch: res
                 });
