@@ -20,15 +20,26 @@ class AddRead extends Component {
         if (term !== '') {
             this.searchImplicit(term);
         }
-        
-    };
+
+    };   
 
     searchImplicit(term) {
+        let a = [];
+        let badServerHelper = [];
+        bookApi.getAll().then(res => {
+            a = res;
+        });
         bookApi.search(term, 5).then(res => {
-            console.log(res);
             if (res !== undefined && res.error === undefined && res.error !== 'empty query') {
+                for (var i = 0; i < res.length; i++) {
+                    let b = a.filter(c => c.id === res[i].id);                    
+                    badServerHelper = badServerHelper.concat(b);
+                    if (b.length === 0) {
+                        badServerHelper.push(res[i]);
+                    }
+                }
                 this.setState({
-                    listSearch: res
+                    listSearch: badServerHelper
                 });
             } else {
                 this.setState({
@@ -39,10 +50,7 @@ class AddRead extends Component {
     }
 
     onBookChange = (book, shelf) => {
-        bookApi.update(book, shelf).then(res => {
-            const message = 'The book ' + book.title + ' has been updated to "' + shelf + '" shelf.';
-            this.props.changeMessages(message, 'Updated');
-        });
+        this.props.booksState(book, shelf);
     }
 
     render() {
@@ -73,6 +81,7 @@ class AddRead extends Component {
 
 AddRead.PropTypes = {
     changeMessages: PropTypes.func.isRequired,
+    booksState: PropTypes.func.isRequired,    
 }
 
 export default AddRead;

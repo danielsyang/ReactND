@@ -19,7 +19,7 @@ class ReadStatus extends Component {
                     <ol className="books-grid">
                         {
                             books.map((book) => {                                
-                                const img = book.imageLinks === undefined ? noImg : book.imageLinks.thumbnail;                                
+                                const img = book.imageLinks === undefined ? noImg : book.imageLinks.thumbnail;
                                 return (
                                     <li key={book.id}>
                                         <div className='book'>
