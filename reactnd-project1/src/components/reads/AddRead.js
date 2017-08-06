@@ -24,22 +24,22 @@ class AddRead extends Component {
     };   
 
     searchImplicit(term) {
-        let a = [];
-        let badServerHelper = [];
+        let helpA = [];
+        let helpServer = [];
         bookApi.getAll().then(res => {
-            a = res;
+            helpA = res;
         });
         bookApi.search(term, 5).then(res => {
             if (res !== undefined && res.error === undefined && res.error !== 'empty query') {
                 for (var i = 0; i < res.length; i++) {
-                    let b = a.filter(c => c.id === res[i].id);                    
-                    badServerHelper = badServerHelper.concat(b);
-                    if (b.length === 0) {
-                        badServerHelper.push(res[i]);
+                    let helpB = helpA.filter(c => c.id === res[i].id);                    
+                    helpServer = helpServer.concat(helpB);
+                    if (helpB.length === 0) {
+                        helpServer.push(res[i]);
                     }
                 }
                 this.setState({
-                    listSearch: badServerHelper
+                    listSearch: helpServer
                 });
             } else {
                 this.setState({
