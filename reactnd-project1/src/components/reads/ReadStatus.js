@@ -21,7 +21,6 @@ class ReadStatus extends Component {
                             books.map((book) => {
                                 const img = book.imageLinks === undefined ? noImg : book.imageLinks.thumbnail;
                                 const correctShelf = book.shelf === undefined ? 'none' : book.shelf;
-                                console.log(correctShelf);
                                 return (
                                     <li key={book.id}>
                                         <div className='book'>
