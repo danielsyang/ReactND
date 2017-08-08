@@ -30,7 +30,7 @@ class AddRead extends Component {
             helpA = res;
         });
         bookApi.search(term, 5).then(res => {
-            if (res !== undefined && res.error === undefined && res.error !== 'empty query') {
+            if (res !== undefined && res.error === undefined && res.error !== 'empty query') {                
                 for (var i = 0; i < res.length; i++) {
                     let helpB = helpA.filter(c => c.id === res[i].id);                    
                     helpServer = helpServer.concat(helpB);

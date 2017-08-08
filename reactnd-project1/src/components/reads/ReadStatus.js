@@ -18,16 +18,18 @@ class ReadStatus extends Component {
                 <div className='bookshelf-books'>
                     <ol className="books-grid">
                         {
-                            books.map((book) => {                                
+                            books.map((book) => {
                                 const img = book.imageLinks === undefined ? noImg : book.imageLinks.thumbnail;
+                                const correctShelf = book.shelf === undefined ? 'none' : book.shelf;
+                                console.log(correctShelf);
                                 return (
                                     <li key={book.id}>
                                         <div className='book'>
                                             <div className="book-top">
                                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${img}")` }}></div>
                                                 <div className="book-shelf-changer">
-                                                    <select value={book.shelf} onChange={(event) => this.changeBook(book, event)}>
-                                                        <option value="none" disabled defaultChecked>Move to...</option>
+                                                    <select value={correctShelf} onChange={(event) => this.changeBook(book, event)}>
+                                                        <option value="undefined" disabled defaultChecked>Move to...</option>
                                                         <option value="currentlyReading">Currently Reading</option>
                                                         <option value="wantToRead">Want to Read</option>
                                                         <option value="read">Read</option>
