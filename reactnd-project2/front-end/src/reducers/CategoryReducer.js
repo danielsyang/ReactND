@@ -4,9 +4,7 @@ import { initialState } from '../state';
 function category(state = initialState.categories, action) {    
     switch (action.type) {
         case LOAD_CATEGORIES:
-            return {
-                categories: action.data,
-            };
+            return action.data;
         default:
             return state;
     }
