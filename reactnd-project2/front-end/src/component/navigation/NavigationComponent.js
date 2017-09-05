@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import HeaderbarComponent from './HeaderbarComponent';
 import SidebarComponent from './SidebarComponent';
+import CategoryComponent from '../categories/CategoryComponent';
+import './navigation.css';
 
 class NavigationComponent extends Component {
-    state = {
-        visible: false,
-    };
-    toggleVisibility = () => {
-        this.setState({
-            visible: !this.state.visible,
-        });
-    }
     render() {
         return (
-            <div>
-                <HeaderbarComponent toggleVisibility={this.toggleVisibility} />
-                <SidebarComponent toggleVisibility={this.toggleVisibility}
-                    visible={this.state.visible} />
+            <div className='navigation-body'>
+                <HeaderbarComponent />
+                <div className='ajust mdc-toolbar-fixed-adjust'>
+                    <SidebarComponent />
+                    <CategoryComponent />
+                </div>
             </div>
         );
     }

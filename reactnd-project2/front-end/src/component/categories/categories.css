@@ -1,0 +1,9 @@
+.category.content {
+    padding-left: 16px;
+    width: 100%;
+}
+
+.category.mdc-list-group {
+    border: 1px solid #e4e4e4;
+    max-width: 600px;
+}

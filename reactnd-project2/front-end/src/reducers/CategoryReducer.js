@@ -6,7 +6,7 @@ function category(state = initialState, action) {
         case LOAD_CATEGORIES:
             return {
                 ...state,
-                categories: action.data.categories,
+                categories: action.data,
             };
         default:
             return state;
