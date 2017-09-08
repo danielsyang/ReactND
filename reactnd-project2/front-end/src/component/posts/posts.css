@@ -1,0 +1,20 @@
+.posts {
+    margin-left: 16px;
+}
+
+.posts .post-icon-content .material-icons {
+    width: 100%;
+    text-align: center;    
+}
+
+.posts .post-content .content-title {
+    margin-bottom: 0;
+}
+
+.posts .post-content .read-more a {
+    display: flex;
+}
+
+.posts .post-content .read-more a.material-icons {
+    display: inline-block;
+}

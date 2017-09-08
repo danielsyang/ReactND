@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import HeaderbarComponent from './HeaderbarComponent';
 import SidebarComponent from './SidebarComponent';
 import CategoryComponent from '../categories/CategoryComponent';
+import PostsComponent from '../posts/PostsComponent';
 import './navigation.css';
 
 class NavigationComponent extends Component {
@@ -11,7 +13,12 @@ class NavigationComponent extends Component {
                 <HeaderbarComponent />
                 <div className='ajust mdc-toolbar-fixed-adjust'>
                     <SidebarComponent />
-                    <CategoryComponent />
+                    <Route exact path='/' render={() => (
+                        <CategoryComponent />
+                    )} />
+                    <Route exact path='/posts' render={() => (
+                        <PostsComponent />
+                    )} />
                 </div>
             </div>
         );

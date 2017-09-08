@@ -9,8 +9,13 @@ class SidebarComponent extends Component {
             <nav className='mdc-permanent-drawer'>
                 <div className='mdc-list-group'>
                     <div className='mdc-list'>
-                        <a className='mdc-list-item' href='/teste'>Categories</a>
-                        <a className='mdc-list-item' href='/teste'>Post</a>
+                        <div className='mdc-list'>
+                            <a className='mdc-list-item' href='/'>Categories</a>
+
+                            <li className='mdc-list-divider'></li>
+                            <a className='mdc-list-item' href='/posts'>Post</a>
+
+                        </div>
                     </div>
                 </div>
             </nav>
