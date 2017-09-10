@@ -18,3 +18,14 @@
 .posts .post-content .read-more a.material-icons {
     display: inline-block;
 }
+
+.post-create {
+    width: 100%;
+}
+
+.post-create .mdc-layout-grid__cell div {
+    width: 100%;
+}
+.post-create .mdc-layout-grid__cell div .mdc-textfield__label{
+    color: black;   
+}

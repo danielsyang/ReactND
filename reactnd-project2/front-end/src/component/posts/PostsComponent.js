@@ -17,7 +17,10 @@ class PostsComponent extends Component {
                 <h2>
                     All posts
                 </h2>
-                <PostsList posts={posts}/>
+                <a className='mdc-button mdc-button--unelevated mdc-button--accent' href='/create'>
+                    Create post
+                </a>
+                <PostsList posts={posts} />
 
             </div>
         )

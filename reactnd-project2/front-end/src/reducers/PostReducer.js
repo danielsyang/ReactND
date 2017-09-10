@@ -1,10 +1,12 @@
-import { LOAD_POSTS } from '../actions/PostAction';
+import { LOAD_POSTS, CREATE_POST } from '../actions/PostAction';
 import { initialState } from '../state';
 
-function post(state = initialState.posts, action) {    
+function post(state = initialState.posts, action) {
+
     switch (action.type) {
         case LOAD_POSTS:
-            return action.data;
+            return action.data;            
+        case CREATE_POST:            
         default:
             return state;
     }

@@ -4,6 +4,7 @@ import HeaderbarComponent from './HeaderbarComponent';
 import SidebarComponent from './SidebarComponent';
 import CategoryComponent from '../categories/CategoryComponent';
 import PostsComponent from '../posts/PostsComponent';
+import PostsCreate from '../posts/PostsCreate';
 import './navigation.css';
 
 class NavigationComponent extends Component {
@@ -18,6 +19,9 @@ class NavigationComponent extends Component {
                     )} />
                     <Route exact path='/posts' render={() => (
                         <PostsComponent />
+                    )} />
+                    <Route exact path='/create' render={() => (
+                        <PostsCreate />
                     )} />
                 </div>
             </div>
