@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+
 import HeaderbarComponent from './HeaderbarComponent';
 import SidebarComponent from './SidebarComponent';
 import CategoryComponent from '../categories/CategoryComponent';
 import PostsComponent from '../posts/PostsComponent';
 import PostsCreate from '../posts/PostsCreate';
+import PostsDetail from '../posts/PostsDetail';
 import './navigation.css';
 
 class NavigationComponent extends Component {
@@ -22,6 +24,9 @@ class NavigationComponent extends Component {
                     )} />
                     <Route exact path='/create' render={() => (
                         <PostsCreate />
+                    )} />
+                    <Route path='/posts/:id' render={(id) => (
+                        <PostsDetail postId={id} />
                     )} />
                 </div>
             </div>

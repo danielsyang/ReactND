@@ -26,6 +26,11 @@
 .post-create .mdc-layout-grid__cell div {
     width: 100%;
 }
+
 .post-create .mdc-layout-grid__cell div .mdc-textfield__label{
     color: black;   
+}
+
+.post-detail {
+    width: 100%;
 }

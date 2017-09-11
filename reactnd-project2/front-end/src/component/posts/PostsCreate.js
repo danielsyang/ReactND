@@ -49,7 +49,7 @@ class PostsCreate extends Component {
 
     createPost = () => {
         const id = uuid();
-        const currentTime = moment().unix();        
+        const currentTime = moment().unix();
         const { title, owner, category, body } = this.state;
         this.props.create({
             id: id,
@@ -57,7 +57,9 @@ class PostsCreate extends Component {
             title: title,
             body: body,
             owner: owner,
-            category: category,
+            category: category.name,
+        }).catch((erro) => {
+            console.log(erro);
         });
     };
 

@@ -20,3 +20,9 @@ export const createPost = post => fetch(`${api}/posts`, {
     },
     body: JSON.stringify(post)
 });
+
+export const getPost = (id) => fetch(`${api}/posts/:id`, {
+    method: 'GET',
+    id: id,
+    headers: headers,
+});

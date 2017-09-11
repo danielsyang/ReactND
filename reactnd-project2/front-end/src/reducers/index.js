@@ -5,4 +5,5 @@ import post from './PostReducer';
 export default combineReducers({
     categories: category,
     posts: post,
+    selectedPost: post,
 })
