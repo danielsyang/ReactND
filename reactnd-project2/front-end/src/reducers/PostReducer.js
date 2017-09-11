@@ -1,6 +1,6 @@
 import { LOAD_POSTS, CREATE_POST, GET_POST } from '../actions/PostAction';
 
-function post(state = {}, action) {
+function post(state = [], action) {
 
     switch (action.type) {
         case LOAD_POSTS:

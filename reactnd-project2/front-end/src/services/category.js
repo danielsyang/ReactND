@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const api = "http://localhost:5001";
 
 let token = localStorage.token;
