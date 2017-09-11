@@ -21,15 +21,12 @@ class PostsList extends Component {
                                 </small>
                                 <div className='read-more'>
                                     <a href='/'>
-                                        Read more                                        
+                                        Read more
                                     <i className="material-icons">keyboard_arrow_down</i>
                                     </a>
+                                </div>
                             </div>
-
                         </div>
-
-                        </div>
-
                     ))
                 }
             </div>

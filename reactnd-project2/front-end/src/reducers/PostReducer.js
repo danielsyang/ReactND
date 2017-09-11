@@ -1,7 +1,6 @@
 import { LOAD_POSTS, CREATE_POST, GET_POST } from '../actions/PostAction';
-import { initialState } from '../state';
 
-function post(state = initialState.posts, action) {
+function post(state = [], action) {
 
     switch (action.type) {
         case LOAD_POSTS:
@@ -9,8 +8,6 @@ function post(state = initialState.posts, action) {
         case CREATE_POST:
             return action.data;
         case GET_POST:
-            console.log(action);
-            return action.data;
         default:
             return state;
     }

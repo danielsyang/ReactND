@@ -28,9 +28,9 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-const mapStateToProps = initial => {
+const mapStateToProps = state => {
     return {
-        post: initial.selectedPost
+        post: state.selectedPost
     }    
 };
 

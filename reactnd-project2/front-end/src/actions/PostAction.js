@@ -4,7 +4,7 @@ export const LOAD_POSTS = 'LOAD_POSTS';
 export const CREATE_POST = 'CREATE_POST';
 export const GET_POST = 'GET_POST';
 
-export const loadPosts = data => {
+export const loadPosts = data => {    
     return {
         type: LOAD_POSTS,
         data,

@@ -11,9 +11,6 @@ class PostsComponent extends Component {
     }
     render() {
         const { posts } = this.props;
-
-        console.log(posts);
-
         return (
             <div className='posts'>
                 <h2>
@@ -35,9 +32,9 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const mapStateToProps = (initial) => {
+const mapStateToProps = (state) => {
     return {
-        posts: initial.posts,
+        posts: state.posts,
     }
 }
 

@@ -1,7 +1,6 @@
 import { LOAD_CATEGORIES } from '../actions/CategoryAction';
-import { initialState } from '../state';
 
-function category(state = initialState.categories, action) {
+function category(state = [], action) {
 
     switch (action.type) {
         case LOAD_CATEGORIES:

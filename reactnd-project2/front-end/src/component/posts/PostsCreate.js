@@ -117,9 +117,9 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-const mapStateToProps = (initial) => {
+const mapStateToProps = (state) => {
     return {
-        categories: initial.categories,
+        categories: state.categories,
     }
 };
 
