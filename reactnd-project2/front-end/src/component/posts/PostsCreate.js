@@ -3,7 +3,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 
-import { fetchCategories } from '../../actions/CategoryAction';
+import { fetchCategoriesThunk } from '../../actions/CategoryAction';
 import { createPostServer } from '../../actions/PostAction';
 import './posts.css';
 
@@ -112,7 +112,7 @@ class PostsCreate extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadCategories: () => (dispatch(fetchCategories())),
+        loadCategories: () => (dispatch(fetchCategoriesThunk())),
         create: post => dispatch(createPostServer(post)),
     }
 };
