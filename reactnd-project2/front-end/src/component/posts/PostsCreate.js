@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
+import { withRouter } from 'react-router-dom';
 
 import { fetchCategoriesThunk } from '../../actions/CategoryAction';
-import { createPostServer } from '../../actions/PostAction';
+import { createPostThunk } from '../../actions/PostAction';
 import './posts.css';
 
 class PostsCreate extends Component {
@@ -58,6 +59,8 @@ class PostsCreate extends Component {
             body: body,
             owner: owner,
             category: category.name,
+        }).then(() => {            
+            this.props.history.push('/posts');
         }).catch((erro) => {
             console.log(erro);
         });
@@ -113,7 +116,7 @@ class PostsCreate extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         loadCategories: () => (dispatch(fetchCategoriesThunk())),
-        create: post => dispatch(createPostServer(post)),
+        create: post => dispatch(createPostThunk(post)),
     }
 };
 
@@ -126,4 +129,4 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(PostsCreate);
+)(withRouter(PostsCreate));

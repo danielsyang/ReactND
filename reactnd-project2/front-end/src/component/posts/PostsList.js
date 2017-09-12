@@ -6,7 +6,7 @@ import './posts.css';
 class PostsList extends Component {
     convertTime = timestamp => (moment(timestamp).format('DD-MM-YYYY'));
     render() {
-        const { posts } = this.props;
+        const { posts } = this.props;        
         return (
             <div className='mdc-layout-grid'>
                 {

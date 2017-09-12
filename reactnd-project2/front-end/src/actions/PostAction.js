@@ -25,23 +25,30 @@ export const getPost = data => {
     }
 };
 
-export const fetchPosts = () => dispatch => (
+export const fetchPostsThunk = () => dispatch => (
     PostAPI
         .get()
         .then(res => res.json())
         .then(data => dispatch(loadPosts(data)))
 );
 
-export const createPostServer = post => dispatch => (
+export const createPostThunk = post => dispatch => (
     PostAPI
         .createPost(post)
         .then(res => res.json())
         .then(data => dispatch(createPost(data)))
 );
 
-export const getPostServer = id => dispatch => (
+export const getPostThunk = id => dispatch => (
     PostAPI
         .getPost(id)
         .then(res => res.json())
         .then(data => dispatch(getPost(data)))
 );
+
+export const fetchPostCategoryThunk = cat => dispatch => (
+    PostAPI
+        .getPostCategory(cat)
+        .then(res => res.json())
+        .then(data => dispatch(loadPosts(data)))
+)

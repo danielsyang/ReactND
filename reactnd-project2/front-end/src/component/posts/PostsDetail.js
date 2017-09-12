@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPostServer } from '../../actions/PostAction';
+import { getPostThunk } from '../../actions/PostAction';
 import './posts.css';
 
 class PostsDetail extends Component {
     componentWillMount() {
-        const id = this.props.postId.match.params.id;
+        // const id = this.props.postId.match.params.id;
     }
-    render() {
-        console.log(this.props);
+    render() {        
         return (
             <div className='post-detail'>
                 <div className='mdc-layout-grid'>
@@ -24,7 +23,7 @@ class PostsDetail extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        get: id => dispatch(getPostServer(id)),
+        get: id => dispatch(getPostThunk(id)),
     }
 };
 

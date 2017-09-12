@@ -18,15 +18,15 @@ class NavigationComponent extends Component {
                     <SidebarComponent />
                     <Route exact path='/' render={() => (
                         <CategoryComponent />
-                    )} />
-                    <Route exact path='/posts' render={() => (
-                        <PostsComponent />
-                    )} />
+                    )} />                    
                     <Route exact path='/create' render={() => (
                         <PostsCreate />
                     )} />
                     <Route path='/posts/:id' render={(id) => (
                         <PostsDetail postId={id} />
+                    )} />
+                    <Route path='/:category' render={(category) => (
+                        <PostsComponent category={category}/>
                     )} />
                 </div>
             </div>

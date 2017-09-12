@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './posts.css';
 import PostsList from './PostsList';
-import { fetchPosts } from '../../actions/PostAction';
+import { fetchPostsThunk, fetchPostCategoryThunk } from '../../actions/PostAction';
 
 class PostsComponent extends Component {
+    state = {
+        type: '',
+    }
+    componentDidMount() {
+        const typeCat = this.state.type;
+        if (typeCat === 'posts') {
+            this.props.loadPosts();
+        } else {
+            this.props.loadPostsCategory(typeCat);
+        }
+    }
     componentWillMount() {
-        this.props.loadPosts();
+        const cat = this.props.category.match.params.category;
+        this.setState({
+            type: cat,
+        });
     }
     render() {
         const { posts } = this.props;
@@ -20,7 +35,6 @@ class PostsComponent extends Component {
                     Create post
                 </a>
                 <PostsList posts={posts} />
-
             </div>
         )
     }
@@ -28,7 +42,8 @@ class PostsComponent extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadPosts: () => dispatch(fetchPosts())
+        loadPosts: () => dispatch(fetchPostsThunk()),
+        loadPostsCategory: cat => dispatch(fetchPostCategoryThunk(cat)),
     }
 }
 
@@ -36,6 +51,9 @@ const mapStateToProps = (state) => {
     return {
         posts: state.posts,
     }
+}
+PostsComponent.PropTypes = {
+    category: PropTypes.object.isRequired,
 }
 
 export default connect(

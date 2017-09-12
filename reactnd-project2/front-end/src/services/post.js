@@ -26,3 +26,8 @@ export const getPost = (id) => fetch(`${api}/posts/:id`, {
     id: id,
     headers: headers,
 });
+
+export const getPostCategory = cat => fetch(`${api}/` + cat + `/posts`, {
+    method: 'GET',
+    headers: headers,
+});

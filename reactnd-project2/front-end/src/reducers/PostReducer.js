@@ -6,7 +6,7 @@ function post(state = [], action) {
         case LOAD_POSTS:
             return action.data;
         case CREATE_POST:
-            return action.data;
+            return state.concat(action.data);
         case GET_POST:
         default:
             return state;
