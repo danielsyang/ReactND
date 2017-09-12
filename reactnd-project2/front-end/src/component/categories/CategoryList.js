@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCategories } from '../../actions/CategoryAction';
+import { fetchCategoriesThunk } from '../../actions/CategoryAction';
 
 class CategoryList extends Component {
     componentWillMount() {
-        this.props.loadCategories();
+        this.props.fetchCategories();
     }
     render() {
         const { categories } = this.props;
+        console.log(categories);
         return (
             <div className='mdc-layout-grid'>
                 <div className="mdc-layout-grid__inner">
@@ -15,7 +16,7 @@ class CategoryList extends Component {
                         <div className='category mdc-list-group'>
                             <h3 className='mdc-list-group__subheader'>Categories</h3>
                             <ul className='mdc-list mdc-list--two-line'>
-                                {categories.map((cat, index) => (
+                                 {categories.map((cat, index) => (
                                     <li className='mdc-list-item' key={index}>
                                         <span className='mdc-list-item__start-detail'>
                                             <i className='material-icons'>folder</i>
@@ -25,7 +26,7 @@ class CategoryList extends Component {
                                             <i className='material-icons'>info</i>
                                         </span>
                                     </li>
-                                ))}
+                                ))} 
 
                             </ul>
                         </div>
@@ -36,15 +37,15 @@ class CategoryList extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {    
     return {
-        loadCategories: () => dispatch(fetchCategories()),
+        fetchCategories: () => dispatch(fetchCategoriesThunk()),
     }
 }
 
-const mapStateToProps = (initial) => {
+const mapStateToProps = (state) => {
     return {
-        categories: initial.categories,
+        categories: state.categories,
     }
 }
 

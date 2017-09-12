@@ -18,16 +18,16 @@ const logger = store => next => action => {
     return result;
 }
 
-const initialStore = createStore(
+const store = createStore(
     rootReducer,
     compose(
         applyMiddleware(thunk, logger),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
+    ),
 );
 
 ReactDOM.render(
-    <Provider store={initialStore}>
+    <Provider store={store}>
         <App />
     </Provider>, document.getElementById('root'));
 registerServiceWorker();
