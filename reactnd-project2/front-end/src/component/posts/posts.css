@@ -34,3 +34,11 @@
 .post-detail {
     width: 100%;
 }
+
+.no-decoration {
+    text-decoration: none;
+}
+
+.mdc-button .align {
+    
+}

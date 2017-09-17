@@ -21,7 +21,7 @@ export const createPost = post => fetch(`${api}/posts`, {
     body: JSON.stringify(post)
 });
 
-export const getPost = (id) => fetch(`${api}/posts/:id`, {
+export const getPost = (id) => fetch(`${api}/posts/` + id, {
     method: 'GET',
     id: id,
     headers: headers,
@@ -30,4 +30,20 @@ export const getPost = (id) => fetch(`${api}/posts/:id`, {
 export const getPostCategory = cat => fetch(`${api}/` + cat + `/posts`, {
     method: 'GET',
     headers: headers,
+});
+
+export const upVotePost = id => fetch(`${api}/posts/` + id, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({
+        option: 'upVote',
+    }),
+});
+
+export const downVotePost = id => fetch(`${api}/` + id, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify({
+        option: 'downVote',
+    }),
 });

@@ -6,7 +6,7 @@ import './posts.css';
 class PostsList extends Component {
     convertTime = timestamp => (moment(timestamp).format('DD-MM-YYYY'));
     render() {
-        const { posts } = this.props;        
+        const { posts } = this.props;
         return (
             <div className='mdc-layout-grid'>
                 {
@@ -20,7 +20,7 @@ class PostsList extends Component {
                                     Submitted on {this.convertTime(elem.timestamp)} by {elem.author} to {elem.category} category.
                                 </small>
                                 <div className='read-more'>
-                                    <a href='/'>
+                                    <a href={'/post/' + elem.id}>
                                         Read more
                                     <i className="material-icons">keyboard_arrow_down</i>
                                     </a>

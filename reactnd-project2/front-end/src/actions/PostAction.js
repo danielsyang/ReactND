@@ -3,8 +3,10 @@ import * as PostAPI from '../services/post';
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const CREATE_POST = 'CREATE_POST';
 export const GET_POST = 'GET_POST';
+export const UP_VOTE_POST = 'UP_VOTE_POST';
+export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
 
-export const loadPosts = data => {    
+export const loadPosts = data => {
     return {
         type: LOAD_POSTS,
         data,
@@ -21,6 +23,20 @@ export const createPost = data => {
 export const getPost = data => {
     return {
         type: GET_POST,
+        data,
+    }
+};
+
+export const upVotePost = data => {
+    return {
+        type: UP_VOTE_POST,
+        data,
+    }
+};
+
+export const downVotePost = data => {
+    return {
+        type: DOWN_VOTE_POST,
         data,
     }
 };
@@ -51,4 +67,11 @@ export const fetchPostCategoryThunk = cat => dispatch => (
         .getPostCategory(cat)
         .then(res => res.json())
         .then(data => dispatch(loadPosts(data)))
-)
+);
+
+export const upVotePostThunk = id => dispatch => (
+    PostAPI
+        .upVotePost(id)
+        .then(res => res.json())
+        .then(data => dispatch(upVotePost(data)))
+);
