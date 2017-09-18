@@ -34,15 +34,21 @@ export const getPostCategory = cat => fetch(`${api}/` + cat + `/posts`, {
 
 export const upVotePost = id => fetch(`${api}/posts/` + id, {
     method: 'POST',
-    headers: headers,
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
         option: 'upVote',
     }),
 });
 
-export const downVotePost = id => fetch(`${api}/` + id, {
-    method: 'PUT',
-    headers: headers,
+export const downVotePost = id => fetch(`${api}/posts/` + id, {
+    method: 'POST',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
         option: 'downVote',
     }),

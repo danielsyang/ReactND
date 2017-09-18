@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { getPostThunk, upVotePostThunk } from '../../actions/PostAction';
+import { getPostThunk, upVotePostThunk, downVotePostThunk } from '../../actions/PostAction';
 import { fetchCommentsPostThunk } from '../../actions/CommentAction';
 import './posts.css';
 
@@ -36,10 +36,15 @@ class PostsDetail extends Component {
         this.props.upVotePost(id);
     }
 
+    downVote = () => {
+        const id = this.props.post.id;
+        this.props.downVotePost(id);
+    }
+
     convertTime = timestamp => (moment(timestamp).format('DD-MM-YYYY'));
 
     render() {
-        const { post, comments } = this.props;
+        const { post } = this.props;
         return (
             <div className='post-detail'>
                 <div className='mdc-layout-grid max-width'>
@@ -61,7 +66,7 @@ class PostsDetail extends Component {
                             <button className='mdc-fab material-icons' onClick={this.upVote}>
                                 <span className='mdc-fab__icon'>mood</span>
                             </button>
-                            <button className='mdc-fab material-icons'>
+                            <button className='mdc-fab material-icons' onClick={this.downVote}>
                                 <span className='mdc-fab__icon'>mood_bad</span>
                             </button>
                         </div>
@@ -77,6 +82,7 @@ const mapDispatchToProps = dispatch => {
         getPost: id => dispatch(getPostThunk(id)),
         getComments: id => dispatch(fetchCommentsPostThunk(id)),
         upVotePost: id => dispatch(upVotePostThunk(id)),
+        downVotePost: id => dispatch(downVotePostThunk(id)),
     }
 };
 

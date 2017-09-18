@@ -1,4 +1,4 @@
-import { LOAD_POSTS, CREATE_POST, GET_POST } from '../actions/PostAction';
+import { LOAD_POSTS, CREATE_POST } from '../actions/PostAction';
 
 function post(state = [], action) {
 

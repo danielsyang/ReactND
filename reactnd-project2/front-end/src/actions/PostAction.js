@@ -75,3 +75,10 @@ export const upVotePostThunk = id => dispatch => (
         .then(res => res.json())
         .then(data => dispatch(upVotePost(data)))
 );
+
+export const downVotePostThunk = id => dispatch => (
+    PostAPI
+        .downVotePost(id)
+        .then(res => res.json())
+        .then(data => dispatch(downVotePost(data)))
+);
