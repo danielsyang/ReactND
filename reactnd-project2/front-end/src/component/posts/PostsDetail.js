@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
+import CommentComponent from '../comments/CommentComponent';
 import { getPostThunk, upVotePostThunk, downVotePostThunk } from '../../actions/PostAction';
 import { fetchCommentsPostThunk } from '../../actions/CommentAction';
 import './posts.css';
@@ -25,7 +26,11 @@ class PostsDetail extends Component {
         if (voteScore === 0) {
             return 'No one likes it yet!';
         } else if (voteScore === 1) {
-            return 'One person like it!';
+            return 'One person likes it!';
+        } else if (voteScore === -1) {
+            return 'One person hates it!';
+        } else if (voteScore < 0) {
+            return voteScore + ' people hate it';
         } else {
             return voteScore + ' people like it';
         }
@@ -44,7 +49,7 @@ class PostsDetail extends Component {
     convertTime = timestamp => (moment(timestamp).format('DD-MM-YYYY'));
 
     render() {
-        const { post } = this.props;
+        const { post, comments } = this.props;
         return (
             <div className='post-detail'>
                 <div className='mdc-layout-grid max-width'>
@@ -69,6 +74,9 @@ class PostsDetail extends Component {
                             <button className='mdc-fab material-icons' onClick={this.downVote}>
                                 <span className='mdc-fab__icon'>mood_bad</span>
                             </button>
+                        </div>
+                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
+                            <CommentComponent comments={comments} checkVoteScore={this.checkVoteScore} />
                         </div>
                     </div>
                 </div>
