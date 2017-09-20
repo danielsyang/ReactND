@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import CommentComponent from '../comments/CommentComponent';
-import { getPostThunk, upVotePostThunk, downVotePostThunk } from '../../actions/PostAction';
+import CommentCreate from '../comments/CommentCreate';
+import { getPostThunk, upVotePostThunk, downVotePostThunk, deletePostThunk } from '../../actions/PostAction';
 import { fetchCommentsPostThunk } from '../../actions/CommentAction';
+
 import './posts.css';
 
 class PostsDetail extends Component {
@@ -46,6 +48,17 @@ class PostsDetail extends Component {
         this.props.downVotePost(id);
     }
 
+    deletePost = () => {
+        const id = this.props.post.id;        
+        this.props.deletePost(id)
+            .then(() => {
+                console.log('deu certo');
+            }).catch((erro) => {
+                console.log(erro);
+                console.log('deu errado');
+            })
+    }
+
     convertTime = timestamp => (moment(timestamp).format('DD-MM-YYYY'));
 
     render() {
@@ -74,10 +87,17 @@ class PostsDetail extends Component {
                             <button className='mdc-fab material-icons' onClick={this.downVote}>
                                 <span className='mdc-fab__icon'>mood_bad</span>
                             </button>
+                            <button className='mdc-button' onClick={this.deletePost}>
+                                Delete
+                            </button>
                         </div>
                         <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
                             <CommentComponent comments={comments} checkVoteScore={this.checkVoteScore} />
                         </div>
+                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
+                            <button className='mdc-button'>Add Comment</button>
+                        </div>
+                        <CommentCreate postId={post.id} />
                     </div>
                 </div>
             </div>
@@ -91,6 +111,7 @@ const mapDispatchToProps = dispatch => {
         getComments: id => dispatch(fetchCommentsPostThunk(id)),
         upVotePost: id => dispatch(upVotePostThunk(id)),
         downVotePost: id => dispatch(downVotePostThunk(id)),
+        deletePost: id => dispatch(deletePostThunk(id)),
     }
 };
 

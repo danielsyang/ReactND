@@ -3,6 +3,7 @@ import * as CommentAPI from '../services/comment';
 export const LOAD_COMMENTS_POST = 'LOAD_COMMENTS_POST';
 export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT';
 export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
 
 export const fetchCommentsPost = (data) => {
     return {
@@ -25,6 +26,13 @@ export const downVoteComment = data => {
     }
 }
 
+export const createComment = data => {
+    return {
+        type: CREATE_COMMENT,
+        data,
+    }
+}
+
 export const fetchCommentsPostThunk = id => dispatch => (
     CommentAPI
         .getCommentPost(id)
@@ -43,4 +51,11 @@ export const downVoteCommentThunk = id => dispatch => (
         .downVoteComment(id)
         .then(res => res.json())
         .then(data => dispatch(downVoteComment(data)))
+)
+
+export const createCommentThunk = comment => dispatch => (
+    CommentAPI
+        .createComment(comment)
+        .then(res => res.json())
+        .then(data => dispatch(createComment(data)))
 )

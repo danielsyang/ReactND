@@ -5,6 +5,7 @@ export const CREATE_POST = 'CREATE_POST';
 export const GET_POST = 'GET_POST';
 export const UP_VOTE_POST = 'UP_VOTE_POST';
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
+export const DELETE_POST = 'DELETE_POST';
 
 export const loadPosts = data => {
     return {
@@ -40,6 +41,13 @@ export const downVotePost = data => {
         data,
     }
 };
+
+export const deletePost = data => {
+    return {
+        type: DELETE_POST,
+        data,
+    }
+}
 
 export const fetchPostsThunk = () => dispatch => (
     PostAPI
@@ -82,3 +90,10 @@ export const downVotePostThunk = id => dispatch => (
         .then(res => res.json())
         .then(data => dispatch(downVotePost(data)))
 );
+
+export const deletePostThunk = id => dispatch => (
+    PostAPI
+        .deletePost(id)
+        .then(res => res.json())
+        .then(data => dispatch(deletePost(data)))
+)

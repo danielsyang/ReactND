@@ -53,3 +53,13 @@ export const downVotePost = id => fetch(`${api}/posts/` + id, {
         option: 'downVote',
     }),
 });
+
+export const deletePost = id => (
+    fetch(`${api}/posts/` + id, {
+        method: 'DELETE',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+        },
+    })
+)

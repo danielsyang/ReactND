@@ -12,8 +12,19 @@ const headers = {
 
 export const getCommentPost = id => (
     fetch(`${api}/posts/` + id + `/comments`, { headers })
-        .then(res => res.json())        
+        .then(res => res.json())
 );
+
+export const createComment = comment => (
+    fetch(`${api}/comments`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(comment)
+    })
+)
 
 export const upVoteComment = id => (
     fetch(`${api}/comments/` + id, {
@@ -25,7 +36,7 @@ export const upVoteComment = id => (
         body: JSON.stringify({
             option: 'upVote',
         }),
-    })    
+    })
 )
 
 export const downVoteComment = id => (
