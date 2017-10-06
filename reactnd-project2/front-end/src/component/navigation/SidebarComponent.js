@@ -1,26 +1,72 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { ListItem, ListItemText } from 'material-ui/List';
+import Drawer from 'material-ui/Drawer';
+import PropTypes from 'prop-types';
+import Divider from 'material-ui/Divider';
+import Icon from 'material-ui/Icon';
+import { withStyles } from 'material-ui/styles';
 
-import './navigation.css';
+const drawerWidth = 264;
+
+const styles = theme => ({
+    drawerHeader: {
+        height: 64,
+    },
+    drawerPaper: {
+        width: 250,
+        [theme.breakpoints.up('md')]: {
+            width: drawerWidth,
+            position: 'fixed',
+            height: '100%',
+        },
+    },
+    linkRoot: {
+        padding: '20px 18px',
+    },
+})
 
 class SidebarComponent extends Component {
 
+    toggle = () => {
+        console.log('asdasd');
+        this.props.handleDrawerToggle()
+    }
+
     render() {
+        const { mobileOpen, classes, isMobile } = this.props;
         return (
-            <nav className='mdc-permanent-drawer'>
-                <div className='mdc-list-group'>
-                    <div className='mdc-list'>
-                        <div className='mdc-list'>
-                            <a className='mdc-list-item' href='/'>Categories</a>
-
-                            <li className='mdc-list-divider'></li>
-                            <a className='mdc-list-item' href='/posts'>Post</a>
-
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            <Drawer
+                type={isMobile ? 'temporary' : 'permanent'}
+                open={mobileOpen}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+                onRequestClose={this.toggle}
+                ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                }}
+            >
+                <div className={classes.drawerHeader} />
+                <ListItem button classes={{ root: classes.linkRoot, }} component={Link} to={'/'}>
+                    <Icon>language</Icon>
+                    <ListItemText primary='Categories' />
+                </ListItem>
+                <Divider />
+                <ListItem button classes={{ root: classes.linkRoot, }} component={Link} to={'/posts'}>
+                    <Icon>move_to_inbox</Icon>
+                    <ListItemText primary='Posts' />
+                </ListItem>                
+            </Drawer>
         );
     }
 }
 
-export default SidebarComponent;
+SidebarComponent.propTypes = {
+    isMobile: PropTypes.bool.isRequired,
+    mobileOpen: PropTypes.bool.isRequired,
+    handleDrawerToggle: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(SidebarComponent);

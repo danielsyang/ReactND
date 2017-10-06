@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 
 import CommentComponent from '../comments/CommentComponent';
 import CommentCreate from '../comments/CommentCreate';
 import { getPostThunk, upVotePostThunk, downVotePostThunk, deletePostThunk } from '../../actions/PostAction';
 import { fetchCommentsPostThunk } from '../../actions/CommentAction';
 
-import './posts.css';
+const styles = theme => ({
+});
 
 class PostsDetail extends Component {
     state = {
@@ -59,7 +62,7 @@ class PostsDetail extends Component {
             })
     }
 
-    convertTime = timestamp => (moment(timestamp).format('DD-MM-YYYY'));
+    convertTime = timestamp => moment(timestamp).format('DD-MM-YYYY');
 
     render() {
         const { post, comments } = this.props;
@@ -122,7 +125,11 @@ const mapStateToProps = state => {
     }
 };
 
+PostsDetail.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(PostsDetail);
+)(withStyles(styles)(PostsDetail));
