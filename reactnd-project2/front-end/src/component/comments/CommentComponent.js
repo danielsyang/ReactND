@@ -3,10 +3,40 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import moment from 'moment';
+import Icon from 'material-ui/Icon';
+import IconButton from 'material-ui/IconButton';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 
 import { upVoteCommentThunk, downVoteCommentThunk } from '../../actions/CommentAction';
 
 const styles = theme => ({
+    headerComment: {
+        fontWeight: 'bold',
+    },
+    spaceComment: {
+        marginTop: 15,
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    commentAuthor: {
+        display: 'flex',
+    },
+    dateAuthor: {
+        marginLeft: 'auto',
+    },
+    commnetVote: {
+        display: 'flex',
+        alignItems: 'center',
+        margin: 'auto',
+    },
+    buttonDelete: {
+        backgroundColor: '#ff0000',
+        '&:hover': {
+            backgroundColor: '#6d1010',
+        }
+    }
+
 });
 
 class CommentComponent extends Component {
@@ -22,19 +52,28 @@ class CommentComponent extends Component {
         const { comments, checkVoteScore, classes } = this.props;
         return (
             <div>
-                <h3>Comments</h3>
-
+                <Typography type='body1' className={classes.headerComment}>Comments</Typography>
                 {comments.map((comment) => (
-                    <div key={comment.id}>
-                        <p>{comment.author} says: <small>{this.convertTime(comment.timestamp)}</small></p>
-                        <p>{comment.body}</p>
-                        <p>{checkVoteScore(comment.voteScore)}</p>
-                        <a className='mdc-button' onClick={() => this.upVote(comment.id)}>UpVote</a>
-                        /
-                        <a className='mdc-button' onClick={() => this.downVote(comment.id)}>DownVote</a>
+                    <div key={comment.id} className={classes.spaceComment}>
+                        <Typography type='body1' className={classes.commentAuthor}>
+                            {comment.author} says:
+                            <small className={classes.dateAuthor}>{this.convertTime(comment.timestamp)}</small>
+                        </Typography>
+                        <Typography type='body2'>{comment.body}</Typography>
+                        <div className={classes.commnetVote}>
+                            <Typography type='body1'>{checkVoteScore(comment.voteScore)}</Typography>
+                            <IconButton color="accent" onClick={() => this.upVote(comment.id)} >
+                                <Icon>mood</Icon>
+                            </IconButton>
+                            <IconButton  onClick={() => this.downVote(comment.id)}>
+                                <Icon>mood_bad</Icon>
+                            </IconButton>
+                            <Button raised className={classes.buttonDelete}>
+                                Delete
+                            </Button>
+                        </div>
                     </div>
                 ))}
-
             </div>
         )
     }
@@ -54,7 +93,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => {
-    return {        
+    return {
     }
 };
 

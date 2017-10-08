@@ -12,6 +12,7 @@ const drawerWidth = 264;
 const styles = theme => ({
     drawerHeader: {
         height: 64,
+        backgroundColor: '#3f51b5',
     },
     drawerPaper: {
         width: 250,

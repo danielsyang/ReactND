@@ -146,7 +146,7 @@ class PostsCreate extends Component {
                             </Grid>
                             <Grid item xs={12}>
                                 <Button raised color="primary" onClick={this.createPost}>
-                                    Primary
+                                    Create
                                 </Button>
                             </Grid>
                         </Grid>
