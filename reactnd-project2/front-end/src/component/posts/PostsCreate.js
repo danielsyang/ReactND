@@ -3,10 +3,14 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 
 import { fetchCategoriesThunk } from '../../actions/CategoryAction';
 import { createPostThunk } from '../../actions/PostAction';
-import './posts.css';
+
+const styles = theme => ({
+});
 
 class PostsCreate extends Component {
     state = {
@@ -59,7 +63,7 @@ class PostsCreate extends Component {
             body: body,
             owner: owner,
             category: category.name,
-        }).then(() => {            
+        }).then(() => {
             this.props.history.push('/posts');
         }).catch((erro) => {
             console.log(erro);
@@ -129,4 +133,6 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(PostsCreate));
+)(withRouter(
+    withStyles(styles)(PostsCreate)
+));

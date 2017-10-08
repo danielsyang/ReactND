@@ -3,6 +3,13 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
+import Paper from 'material-ui/Paper';
+import Icon from 'material-ui/Icon';
+import IconButton from 'material-ui/IconButton';
+import Button from 'material-ui/Button';
+import Divider from 'material-ui/Divider';
 
 import CommentComponent from '../comments/CommentComponent';
 import CommentCreate from '../comments/CommentCreate';
@@ -10,6 +17,38 @@ import { getPostThunk, upVotePostThunk, downVotePostThunk, deletePostThunk } fro
 import { fetchCommentsPostThunk } from '../../actions/CommentAction';
 
 const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        marginTop: 30,
+    },
+    paperInner: {
+        margin: 'auto',
+    },
+    rootPapper: {
+        padding: 16,
+        marginTop: theme.spacing.unit * 3,
+    },
+    paperText: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    papperAuthor: {
+        textAlign: 'right',
+    },
+    paperTextContent: {
+        padding: 16,
+    },
+    paperVote: {
+        display: 'flex',
+        margin: 'auto',
+        alignItems: 'center',
+    },
+    buttonDelete: {
+        backgroundColor: '#ff0000',
+        '&:hover': {
+            backgroundColor: '#6d1010',
+        }
+    }
 });
 
 class PostsDetail extends Component {
@@ -52,7 +91,7 @@ class PostsDetail extends Component {
     }
 
     deletePost = () => {
-        const id = this.props.post.id;        
+        const id = this.props.post.id;
         this.props.deletePost(id)
             .then(() => {
                 console.log('deu certo');
@@ -65,44 +104,56 @@ class PostsDetail extends Component {
     convertTime = timestamp => moment(timestamp).format('DD-MM-YYYY');
 
     render() {
-        const { post, comments } = this.props;
+        const { post, comments, classes } = this.props;
         return (
-            <div className='post-detail'>
-                <div className='mdc-layout-grid max-width'>
-                    <div className='mdc-layout-grid__inner'>
-                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
-                            <h1>{post.title}</h1>
-                            <p>
-                                <small>Created at {this.convertTime(post.timestamp)} by {post.author} in <a href='/react' className='no-decoration'> {post.category}</a>
+            <div className={classes.root}>
+                <Grid container spacing={24}>
+                    <Grid item xs={12} md={8} classes={{
+                        typeItem: classes.paperInner,
+                    }}>
+                        <Paper className={classes.rootPapper} elevation={4}>
+                            <div className={classes.paperText}>
+                                <Typography type="display2" component="h2">
+                                    {post.title}
+                                </Typography>
+
+                                <small className={classes.papperAuthor}>
+                                    Created at {this.convertTime(post.timestamp)} by {post.author} in <a href='/react' className='no-decoration'> {post.category}</a>
                                 </small>
-                            </p>
-                            <p>
-                                {post.body}
-                            </p>
-                        </div>
-                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
-                            <span>
-                                {this.checkVoteScore(post.voteScore)}
-                            </span>
-                            <button className='mdc-fab material-icons' onClick={this.upVote}>
-                                <span className='mdc-fab__icon'>mood</span>
-                            </button>
-                            <button className='mdc-fab material-icons' onClick={this.downVote}>
-                                <span className='mdc-fab__icon'>mood_bad</span>
-                            </button>
-                            <button className='mdc-button' onClick={this.deletePost}>
-                                Delete
-                            </button>
-                        </div>
-                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
+
+                                <Typography type="body1" component="p" className={classes.paperTextContent}>
+                                    {post.body}
+                                </Typography>
+
+                                <div className={classes.paperVote}>
+                                    <Typography type="body1" component="h2">
+                                        {this.checkVoteScore(post.voteScore)}
+                                    </Typography>
+                                    <IconButton color="accent" onClick={this.upVote} className={classes.buttonIcon}>
+                                        <Icon>mood</Icon>
+                                    </IconButton>
+                                    <IconButton onClick={this.downVote} className={classes.buttonIcon}>
+                                        <Icon>mood_bad</Icon>
+                                    </IconButton>
+                                    <Button raised className={classes.buttonDelete}>
+                                        Delete
+                                    </Button>
+                                </div>
+                            </div>
+
+                            <Divider />
+
+
                             <CommentComponent comments={comments} checkVoteScore={this.checkVoteScore} />
-                        </div>
-                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
-                            <button className='mdc-button'>Add Comment</button>
-                        </div>
-                        <CommentCreate postId={post.id} />
-                    </div>
-                </div>
+
+                            {/* <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
+                                <button className='mdc-button'>Add Comment</button>
+                            </div> */}
+
+                            <CommentCreate postId={post.id} />
+                        </Paper>
+                    </Grid>
+                </Grid>
             </div>
         );
     }
