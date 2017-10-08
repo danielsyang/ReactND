@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 import moment from 'moment';
 
 import { upVoteCommentThunk, downVoteCommentThunk } from '../../actions/CommentAction';
 
+const styles = theme => ({
+});
+
 class CommentComponent extends Component {
-    convertTime = timestamp => (moment(timestamp).format('DD-MM-YYYY'));
+    convertTime = timestamp => moment(timestamp).format('DD-MM-YYYY');
+
     upVote = (id) => {
         this.props.upVoteComment(id);
     }
@@ -14,7 +19,7 @@ class CommentComponent extends Component {
         this.props.downVoteComment(id);
     }
     render() {
-        const { comments, checkVoteScore } = this.props;
+        const { comments, checkVoteScore, classes } = this.props;
         return (
             <div>
                 <h3>Comments</h3>
@@ -35,9 +40,10 @@ class CommentComponent extends Component {
     }
 }
 
-CommentComponent.PropTypes = {
+CommentComponent.propTypes = {
     comments: PropTypes.array.isRequired,
     checkVoteScore: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
 }
 
 const mapDispatchToProps = dispatch => {
@@ -55,4 +61,4 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CommentComponent);
+)(withStyles(styles)(CommentComponent));

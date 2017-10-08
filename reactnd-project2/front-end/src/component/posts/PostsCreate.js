@@ -5,11 +5,29 @@ import uuid from 'uuid';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
+import TextField from 'material-ui/TextField';
+import Input, { InputLabel } from 'material-ui/Input';
+import { MenuItem } from 'material-ui/Menu';
+import Select from 'material-ui/Select';
+import Button from 'material-ui/Button';
 
 import { fetchCategoriesThunk } from '../../actions/CategoryAction';
 import { createPostThunk } from '../../actions/PostAction';
 
 const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        marginTop: 30,
+    },
+    centerItem: {
+        margin: 'auto',
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: '100%',
+    },
 });
 
 class PostsCreate extends Component {
@@ -71,47 +89,69 @@ class PostsCreate extends Component {
     };
 
     render() {
-        const { categories } = this.props;
+        const { categories, classes } = this.props;
         return (
-            <div className='post-create'>
-                <div className='mdc-layout-grid'>
-                    <div className='mdc-layout-grid__inner'>
-                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-4'>
-                            <div className='mdc-textfield'>
-                                <input id='title' type='text' className='mdc-textfield__input' value={this.state.title} onChange={this.onTitleChange} />
-                                <label className='mdc-textfield__label mdc-textfield__label--float-above' htmlFor='title'>Title</label>
-                            </div>
-                        </div>
-                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-4'>
-                            <div className='mdc-textfield'>
-                                <input id='owner' type='text' className='mdc-textfield__input' value={this.state.owner} onChange={this.onOwnerChange} />
-                                <label className='mdc-textfield__label mdc-textfield__label--float-above' htmlFor='owner'>Owner</label>
-                            </div>
-                        </div>
-                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-4'>
-                            <div className='mdc-textfield'>
-                                <select id='category' type='text' className='mdc-select' onChange={this.onCategoryChange}>
-                                    <option defaultValue>Pick one category</option>
+            <div className={classes.root}>
+                <Grid container spacing={24}>
+                    <Grid item xs={12} md={8} classes={{
+                        typeItem: classes.centerItem,
+                    }}>
+                        <Grid container spacing={24}>
+                            <Grid item xs={4} >
+                                <TextField
+                                    label="Title"
+                                    placeholder="Title"
+                                    className={classes.textField}
+                                    margin="normal"
+                                    value={this.state.title}
+                                    onChange={this.onTitleChange}
+                                />
+                            </Grid>
+                            <Grid item xs={4} >
+                                <TextField
+                                    label="Owner"
+                                    placeholder="Owner"
+                                    className={classes.textField}
+                                    margin="normal"
+                                    value={this.state.owner}
+                                    onChange={this.onOwnerChange}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <InputLabel htmlFor='category'>Category</InputLabel>
+                                <Select
+                                    value={this.state.category}
+                                    onChange={this.onCategoryChange}
+                                    input={<Input id='category' />} >
+                                    <MenuItem value=''>
+                                        <em>None</em>
+                                    </MenuItem>
                                     {categories.map((elem, index) => (
-                                        <option key={index} value={index}>{elem.name}</option>
+                                        <MenuItem key={index} value={index}>{elem.name}</MenuItem>
                                     ))}
-                                </select>
-                                <label className='mdc-textfield__label mdc-textfield__label--float-above' htmlFor='category'>Category</label>
-                            </div>
-                        </div>
-                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
-                            <div className='mdc-textfield mdc-textfield--multiline'>
-                                <label className='mdc-textfield__label mdc-textfield__label--float-above' htmlFor='body' >Body</label>
-                                <textarea id='body' className='mdc-textfield__input' rows='8' cols='40' value={this.state.body} onChange={this.onBodyChange}></textarea>
-                            </div>
-                        </div>
-                        <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
-                            <button className='mdc-button mdc-button--unelevated mdc-button--accent' onClick={this.createPost}>
-                                create
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                                </Select>
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="multiline-flexible"
+                                    label="Body"
+                                    multiline
+                                    rowsMax="4"
+                                    value={this.state.body}
+                                    onChange={this.onBodyChange}
+                                    className={classes.textField}
+                                    margin="normal"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button raised color="primary" onClick={this.createPost}>
+                                    Primary
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </div>
         )
     }
@@ -128,6 +168,10 @@ const mapStateToProps = (state) => {
     return {
         categories: state.categories,
     }
+};
+
+PostsCreate.propTypes = {
+    classes: PropTypes.object.isRequired,
 };
 
 export default connect(
