@@ -81,8 +81,7 @@ function add (token, post) {
   })
 }
 
-function vote (token, id, option) {
-  console.log(option);
+function vote (token, id, option) {  
   return new Promise((res) => {
     let posts = getData(token)
     post = posts[id]
@@ -103,7 +102,7 @@ function vote (token, id, option) {
 function disable (token, id) {
     return new Promise((res) => {
       let posts = getData(token)
-      posts[id].deleted = true
+      posts[id].deleted = true      
       res(posts[id])
     })
 }

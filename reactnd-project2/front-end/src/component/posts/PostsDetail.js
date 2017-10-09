@@ -10,6 +10,7 @@ import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import Divider from 'material-ui/Divider';
+import { withRouter } from 'react-router-dom';
 
 import CommentComponent from '../comments/CommentComponent';
 import CommentCreate from '../comments/CommentCreate';
@@ -94,10 +95,10 @@ class PostsDetail extends Component {
         const id = this.props.post.id;
         this.props.deletePost(id)
             .then(() => {
-                console.log('deu certo');
+                this.props.history.push('/posts');
             }).catch((erro) => {
                 console.log(erro);
-                console.log('deu errado');
+                console.log('Fuck');
             })
     }
 
@@ -188,4 +189,4 @@ PostsDetail.propTypes = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withStyles(styles)(PostsDetail));
+)(withRouter(withStyles(styles)(PostsDetail)));

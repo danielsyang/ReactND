@@ -4,6 +4,7 @@ export const LOAD_COMMENTS_POST = 'LOAD_COMMENTS_POST';
 export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT';
 export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const fetchCommentsPost = (data) => {
     return {
@@ -33,6 +34,13 @@ export const createComment = data => {
     }
 }
 
+export const deleteComment = data => {
+    return {
+        type: DELETE_COMMENT,
+        data,
+    }
+}
+
 export const fetchCommentsPostThunk = id => dispatch => (
     CommentAPI
         .getCommentPost(id)
@@ -58,4 +66,11 @@ export const createCommentThunk = comment => dispatch => (
         .createComment(comment)
         .then(res => res.json())
         .then(data => dispatch(createComment(data)))
+)
+
+export const deleteCommentThunk = id => dispatch => (
+    CommentAPI
+        .deleteComment(id)
+        .then(res => res.json())
+        .then(data => dispatch(deleteComment(data)))
 )

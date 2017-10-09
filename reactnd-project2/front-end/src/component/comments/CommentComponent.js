@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
-import { upVoteCommentThunk, downVoteCommentThunk } from '../../actions/CommentAction';
+import { upVoteCommentThunk, downVoteCommentThunk, deleteCommentThunk } from '../../actions/CommentAction';
 
 const styles = theme => ({
     headerComment: {
@@ -48,6 +48,9 @@ class CommentComponent extends Component {
     downVote = (id) => {
         this.props.downVoteComment(id);
     }
+    deleteComment = (id) => {
+        this.props.deleteComment(id);
+    }
     render() {
         const { comments, checkVoteScore, classes } = this.props;
         return (
@@ -68,7 +71,7 @@ class CommentComponent extends Component {
                             <IconButton  onClick={() => this.downVote(comment.id)}>
                                 <Icon>mood_bad</Icon>
                             </IconButton>
-                            <Button raised className={classes.buttonDelete}>
+                            <Button raised className={classes.buttonDelete} onClick={() => this.deleteComment(comment.id)}>
                                 Delete
                             </Button>
                         </div>
@@ -89,6 +92,7 @@ const mapDispatchToProps = dispatch => {
     return {
         upVoteComment: id => dispatch(upVoteCommentThunk(id)),
         downVoteComment: id => dispatch(downVoteCommentThunk(id)),
+        deleteComment: id => dispatch(deleteCommentThunk(id)),
     }
 }
 

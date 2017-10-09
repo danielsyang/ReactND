@@ -44,16 +44,6 @@ class PostsComponent extends Component {
         }
     }
 
-    // shouldComponentUpdate(nextProps) {
-    //     if (nextProps.category.match.params.category !== this.props.category.match.params.category) {
-    //         this.configureState();
-    //         return true;
-    //     }
-    //     return false;
-    // }    
-    // componentDidUpdate() {
-    //     this.getData();
-    // }
     componentDidMount() {
         this.getData();
 

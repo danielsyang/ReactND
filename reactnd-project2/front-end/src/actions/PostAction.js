@@ -21,8 +21,7 @@ export const createPost = data => {
     }
 };
 
-export const getPost = data => {
-    console.log(data);
+export const getPost = data => {    
     return {
         type: GET_POST,
         data,

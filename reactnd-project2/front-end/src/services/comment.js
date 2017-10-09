@@ -26,6 +26,13 @@ export const createComment = comment => (
     })
 )
 
+export const deleteComment = id => (
+    fetch(`${api}/comments/` + id, {
+        method: 'DELETE',
+        headers: headers
+    })
+)
+
 export const upVoteComment = id => (
     fetch(`${api}/comments/` + id, {
         method: 'POST',
