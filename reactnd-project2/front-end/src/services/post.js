@@ -54,12 +54,11 @@ export const downVotePost = id => fetch(`${api}/posts/` + id, {
     }),
 });
 
-export const deletePost = id => (
-    fetch(`${api}/posts/` + id, {
+export const deletePost = id => {
+    console.log(`${api}/posts/` + id);
+    return fetch(`${api}/posts/` + id, {
         method: 'DELETE',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json',
-        },
+        headers: headers,
     })
-)
+    }
+

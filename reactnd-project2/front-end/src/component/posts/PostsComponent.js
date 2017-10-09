@@ -27,7 +27,15 @@ class PostsComponent extends Component {
     state = {
         type: '',
     }
-    componentDidMount() {
+
+    configureState() {
+        const cat = this.props.category.match.params.category;
+        this.setState({
+            type: cat,
+        });
+    }
+
+    getData() {
         const typeCat = this.state.type;
         if (typeCat === 'posts') {
             this.props.loadPosts();
@@ -35,11 +43,24 @@ class PostsComponent extends Component {
             this.props.loadPostsCategory(typeCat);
         }
     }
+
+    // shouldComponentUpdate(nextProps) {
+    //     if (nextProps.category.match.params.category !== this.props.category.match.params.category) {
+    //         this.configureState();
+    //         return true;
+    //     }
+    //     return false;
+    // }    
+    // componentDidUpdate() {
+    //     this.getData();
+    // }
+    componentDidMount() {
+        this.getData();
+
+    }
     componentWillMount() {
-        const cat = this.props.category.match.params.category;
-        this.setState({
-            type: cat,
-        });
+        this.configureState();
+
     }
     render() {
         const { posts, classes } = this.props;
@@ -63,9 +84,9 @@ class PostsComponent extends Component {
                                 </Link>
                             </Grid>
                         </Grid>
-                        
-                            <PostsList posts={posts} />
-                        
+
+                        <PostsList posts={posts} />
+
                     </Grid>
                 </Grid>
             </div>

@@ -105,6 +105,7 @@ class PostsDetail extends Component {
 
     render() {
         const { post, comments, classes } = this.props;
+
         return (
             <div className={classes.root}>
                 <Grid container spacing={24}>
@@ -112,45 +113,49 @@ class PostsDetail extends Component {
                         typeItem: classes.paperInner,
                     }}>
                         <Paper className={classes.rootPapper} elevation={4}>
-                            <div className={classes.paperText}>
-                                <Typography type="display2" component="h2">
-                                    {post.title}
-                                </Typography>
 
-                                <small className={classes.papperAuthor}>
-                                    Created at {this.convertTime(post.timestamp)} by {post.author} in <a href='/react' className='no-decoration'> {post.category}</a>
-                                </small>
+                            {(!post.error && post.id !== undefined) &&
+                                <div>                                    
+                                    <div className={classes.paperText}>
+                                        <Typography type="display2" component="h2">
+                                            {post.title}
+                                        </Typography>
 
-                                <Typography type="body1" component="p" className={classes.paperTextContent}>
-                                    {post.body}
-                                </Typography>
+                                        <small className={classes.papperAuthor}>
+                                            Created at {this.convertTime(post.timestamp)} by {post.author} in <a href='/react' className='no-decoration'> {post.category}</a>
+                                        </small>
 
-                                <div className={classes.paperVote}>
-                                    <Typography type="body1" component="h2">
-                                        {this.checkVoteScore(post.voteScore)}
-                                    </Typography>
-                                    <IconButton color="accent" onClick={this.upVote} className={classes.buttonIcon}>
-                                        <Icon>mood</Icon>
-                                    </IconButton>
-                                    <IconButton onClick={this.downVote} className={classes.buttonIcon}>
-                                        <Icon>mood_bad</Icon>
-                                    </IconButton>
-                                    <Button raised className={classes.buttonDelete}>
-                                        Delete
+                                        <Typography type="body1" component="p" className={classes.paperTextContent}>
+                                            {post.body}
+                                        </Typography>
+
+                                        <div className={classes.paperVote}>
+                                            <Typography type="body1" component="h2">
+                                                {this.checkVoteScore(post.voteScore)}
+                                            </Typography>
+                                            <IconButton color="accent" onClick={this.upVote} className={classes.buttonIcon}>
+                                                <Icon>mood</Icon>
+                                            </IconButton>
+                                            <IconButton onClick={this.downVote} className={classes.buttonIcon}>
+                                                <Icon>mood_bad</Icon>
+                                            </IconButton>
+                                            <Button raised className={classes.buttonDelete} onClick={this.deletePost}>
+                                                Delete
                                     </Button>
+                                        </div>
+                                    </div>
+
+                                    <Divider />
+
+                                    <CommentComponent comments={comments} checkVoteScore={this.checkVoteScore} />
+
+                                    <CommentCreate postId={post.id} />
                                 </div>
-                            </div>
-
-                            <Divider />
-
-
-                            <CommentComponent comments={comments} checkVoteScore={this.checkVoteScore} />
-
-                            {/* <div className='mdc-layout-grid__cell mdc-layout-grid__cell--span-12'>
-                                <button className='mdc-button'>Add Comment</button>
-                            </div> */}
-
-                            <CommentCreate postId={post.id} />
+                            }
+                            {(post.error || post.id === undefined) && <Typography type="display2" component="h2">
+                                Id does not exist.
+                                </Typography>
+                            }
                         </Paper>
                     </Grid>
                 </Grid>

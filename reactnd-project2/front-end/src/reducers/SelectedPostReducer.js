@@ -1,7 +1,6 @@
 import { GET_POST, UP_VOTE_POST, DOWN_VOTE_POST, DELETE_POST } from '../actions/PostAction';
 
-function selectedPost(state = {}, action) {
-    console.log(action);
+function selectedPost(state = {}, action) {    
     switch (action.type) {
         case DELETE_POST:
         case GET_POST:

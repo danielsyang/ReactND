@@ -22,6 +22,7 @@ export const createPost = data => {
 };
 
 export const getPost = data => {
+    console.log(data);
     return {
         type: GET_POST,
         data,
@@ -95,5 +96,9 @@ export const deletePostThunk = id => dispatch => (
     PostAPI
         .deletePost(id)
         .then(res => res.json())
-        .then(data => dispatch(deletePost(data)))
+        .then(data => {
+            console.log('vai tomar no cu');
+            console.log(data);
+            return dispatch(deletePost(data))
+        })
 )
