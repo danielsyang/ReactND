@@ -2,6 +2,7 @@ import * as PostAPI from '../services/post';
 
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const CREATE_POST = 'CREATE_POST';
+export const EDIT_POST = 'EDIT_POST';
 export const GET_POST = 'GET_POST';
 export const UP_VOTE_POST = 'UP_VOTE_POST';
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
@@ -24,6 +25,13 @@ export const createPost = data => {
 export const getPost = data => {    
     return {
         type: GET_POST,
+        data,
+    }
+};
+
+export const editPost = data => {    
+    return {
+        type: EDIT_POST,
         data,
     }
 };
@@ -59,6 +67,13 @@ export const fetchPostsThunk = () => dispatch => (
 export const createPostThunk = post => dispatch => (
     PostAPI
         .createPost(post)
+        .then(res => res.json())
+        .then(data => dispatch(createPost(data)))
+);
+
+export const editPostThunk = post => dispatch => (
+    PostAPI
+        .editPost(post)
         .then(res => res.json())
         .then(data => dispatch(createPost(data)))
 );

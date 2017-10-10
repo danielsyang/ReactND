@@ -21,6 +21,15 @@ export const createPost = post => fetch(`${api}/posts`, {
     body: JSON.stringify(post)
 });
 
+export const editPost = post => fetch(`${api}/posts/` + post.id, {
+    method: 'PUT',
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(post)
+});
+
 export const getPost = (id) => fetch(`${api}/posts/` + id, {
     method: 'GET',
     id: id,
@@ -60,5 +69,3 @@ export const deletePost = id => (
         headers: headers,
     })
 )
-
-
