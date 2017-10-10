@@ -30,10 +30,11 @@ class PostsList extends Component {
     render() {
         const { posts, classes } = this.props;
         return (
-            <Grid container spacing={24}>
+            <Grid container spacing={24}>                
                 {posts.map((elem, index) => (
                     <Grid item xs={12} sm={6} md={6} key={index}>
                         <Card className={classes.card} >
+
                             <CardContent>
                                 <Typography type="headline" component='h2'>
                                     {elem.title}

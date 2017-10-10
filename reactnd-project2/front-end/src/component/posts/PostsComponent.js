@@ -44,7 +44,7 @@ class PostsComponent extends Component {
     }
     componentWillReceiveProps(props) {
         const cat = props.category.match.params.category;
-        if (cat !== this.state.type) {            
+        if (cat !== this.state.type) {
             this.setState({
                 type: cat,
             });
@@ -53,11 +53,13 @@ class PostsComponent extends Component {
     }
     componentDidMount() {
         const typeCat = this.state.type;
-        this.getData(typeCat);        
+        this.getData(typeCat);
     }
     componentWillMount() {
         this.configureState();
     }
+
+ 
     render() {
         const { posts, classes } = this.props;
         return (
@@ -78,7 +80,9 @@ class PostsComponent extends Component {
                                         Create post
                                     </Button>
                                 </Link>
+
                             </Grid>
+                            Sort by: <Button dense onClick={this.sortVote}>Vote</Button><Button dense onClick={this.sortDate}>Date</Button>
                         </Grid>
 
                         <PostsList posts={posts} />

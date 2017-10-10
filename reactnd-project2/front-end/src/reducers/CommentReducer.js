@@ -1,7 +1,6 @@
 import { LOAD_COMMENTS_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT, CREATE_COMMENT, DELETE_COMMENT, EDIT_COMMENT } from '../actions/CommentAction';
 
-function comment(state = [], action) {
-    console.log('asdasdas');
+function comment(state = [], action) {    
     switch (action.type) {
 
         case CREATE_COMMENT:
