@@ -71,12 +71,12 @@ export const createPostThunk = post => dispatch => (
         .then(data => dispatch(createPost(data)))
 );
 
-export const editPostThunk = post => dispatch => (
+export const editPostThunk = post => dispatch => {console.log('ásd'); return (
     PostAPI
         .editPost(post)
         .then(res => res.json())
-        .then(data => dispatch(createPost(data)))
-);
+        .then(data => dispatch(editPost(data)))
+)};
 
 export const getPostThunk = id => dispatch => (
     PostAPI

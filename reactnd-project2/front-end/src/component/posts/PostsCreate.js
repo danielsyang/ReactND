@@ -172,7 +172,7 @@ class PostsCreate extends Component {
                                     Create
                                 </Button>}
 
-                                {postId !== undefined && <Button raised color="primary" onClick={this.createPost}>
+                                {postId !== undefined && <Button raised color="primary" onClick={this.editPost}>
                                     Edit
                                 </Button>}
 
