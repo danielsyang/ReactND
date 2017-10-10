@@ -1,6 +1,7 @@
-import { LOAD_COMMENTS_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT, CREATE_COMMENT, DELETE_COMMENT } from '../actions/CommentAction';
+import { LOAD_COMMENTS_POST, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT, CREATE_COMMENT, DELETE_COMMENT, EDIT_COMMENT } from '../actions/CommentAction';
 
 function comment(state = [], action) {
+    console.log('asdasdas');
     switch (action.type) {
 
         case CREATE_COMMENT:
@@ -19,6 +20,13 @@ function comment(state = [], action) {
             ));
         case LOAD_COMMENTS_POST:
             return action.data;
+        case EDIT_COMMENT:
+            return state.map(elem => {
+                if (elem.id === action.data.id) {
+                    return action.data;
+                }
+                return elem;
+            });
         default:
             return state;
     }

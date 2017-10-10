@@ -33,6 +33,17 @@ export const deleteComment = id => (
     })
 )
 
+export const editComment = comment => (
+    fetch(`${api}/comments/` + comment.id, {
+        method: 'PUT',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(comment)
+    })
+)
+
 export const upVoteComment = id => (
     fetch(`${api}/comments/` + id, {
         method: 'POST',

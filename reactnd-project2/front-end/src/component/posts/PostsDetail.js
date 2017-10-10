@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -55,6 +56,7 @@ const styles = theme => ({
 class PostsDetail extends Component {
     state = {
         id: '',
+        commnetId: undefined,
     }
     componentWillMount() {
         const id = this.props.postId.match.params.id;
@@ -102,6 +104,14 @@ class PostsDetail extends Component {
             })
     }
 
+    editComment = (comment) => {
+        this.setState({
+            comment: comment,
+        });
+        console.log(comment);
+        
+    }
+
     convertTime = timestamp => moment(timestamp).format('DD-MM-YYYY');
 
     render() {
@@ -116,7 +126,7 @@ class PostsDetail extends Component {
                         <Paper className={classes.rootPapper} elevation={4}>
 
                             {(!post.error && post.id !== undefined) &&
-                                <div>                                    
+                                <div>
                                     <div className={classes.paperText}>
                                         <Typography type="display2" component="h2">
                                             {post.title}
@@ -142,15 +152,20 @@ class PostsDetail extends Component {
                                             </IconButton>
                                             <Button raised className={classes.buttonDelete} onClick={this.deletePost}>
                                                 Delete
-                                    </Button>
+                                            </Button>
+                                            <Link to={post.id + '/edit'}>
+                                                <Button raised>
+                                                    Edit
+                                                </Button>
+                                            </Link>
                                         </div>
                                     </div>
 
                                     <Divider />
 
-                                    <CommentComponent comments={comments} checkVoteScore={this.checkVoteScore} />
+                                    <CommentComponent comments={comments} checkVoteScore={this.checkVoteScore} editComment={this.editComment} />
 
-                                    <CommentCreate postId={post.id} />
+                                    <CommentCreate postId={post.id} comment={this.state.comment} />
                                 </div>
                             }
                             {(post.error || post.id === undefined) && <Typography type="display2" component="h2">

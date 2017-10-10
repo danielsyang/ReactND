@@ -51,6 +51,9 @@ class CommentComponent extends Component {
     deleteComment = (id) => {
         this.props.deleteComment(id);
     }
+    editComment = (comment) => {
+        this.props.editComment(comment);
+    }
     render() {
         const { comments, checkVoteScore, classes } = this.props;
         return (
@@ -73,6 +76,9 @@ class CommentComponent extends Component {
                             </IconButton>
                             <Button raised className={classes.buttonDelete} onClick={() => this.deleteComment(comment.id)}>
                                 Delete
+                            </Button>
+                            <Button raised onClick={() => this.editComment(comment)}>
+                                Edit
                             </Button>
                         </div>
                     </div>

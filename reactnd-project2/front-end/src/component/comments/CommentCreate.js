@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 
-import { createCommentThunk } from '../../actions/CommentAction';
+import { createCommentThunk, editCommentThunk } from '../../actions/CommentAction';
 
 const styles = theme => ({
     typeContainer: {
@@ -30,6 +30,7 @@ class CommentCreate extends Component {
     state = {
         owner: '',
         body: '',
+        comment: {},
     }
 
     onOwnerChange = (event) => {
@@ -55,7 +56,7 @@ class CommentCreate extends Component {
             id: id,
             timestamp: currentTime,
             body: body,
-            owner: owner,
+            author: owner,
             parentId: postId,
         }).then(() => {
             this.setState({
@@ -65,6 +66,29 @@ class CommentCreate extends Component {
         }).catch((erro) => {
             console.log(erro);
         });;
+    }
+
+    editComment = () => {
+        const { owner, body, comment } = this.state;
+        const newComment = Object.assign(comment, { author: owner, body });
+        this.props.editComment(newComment).then(() => {
+            // console.log('asd');            
+        }).catch(error => {
+            console.log(error);
+        })
+
+    }
+
+    componentDidUpdate() {
+        const newComment = this.props.comment;
+
+        if (newComment !== undefined && newComment.id !== this.state.comment.id) {
+            this.setState({
+                owner: newComment.author,
+                body: newComment.body,
+                comment: newComment,
+            });
+        }
     }
 
     render() {
@@ -83,14 +107,19 @@ class CommentCreate extends Component {
                     <TextField
                         label="Body"
                         placeholder="Body"
-                        multiline
                         margin="normal"
                         value={this.state.body}
                         onChange={this.onBodyChange}
                     />
-                    <Button raised color="primary" onClick={this.createComment} className={classes.button}>
-                    Comment
-                    </Button>
+                    {this.state.comment.id === undefined && <Button raised color="primary" onClick={this.createComment} className={classes.button}>
+                        Comment
+                    </Button>}
+
+                    {this.state.comment.id && <Button raised color="primary" onClick={this.editComment} className={classes.button}>
+                        Edit
+                    </Button>}
+
+
                 </Grid>
             </Grid >
         )
@@ -100,6 +129,7 @@ class CommentCreate extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         createComment: comment => (dispatch(createCommentThunk(comment))),
+        editComment: comment => (dispatch(editCommentThunk(comment))),
     }
 };
 
@@ -108,7 +138,9 @@ const mapStateToProps = state => (
 )
 
 CommentCreate.propTypes = {
+    postId: PropTypes.string.isRequired,
     classes: PropTypes.object.isRequired,
+    comment: PropTypes.object,
 }
 
 export default connect(
