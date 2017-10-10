@@ -8,7 +8,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 
 import PostsList from './PostsList';
-import { fetchPostsThunk, fetchPostCategoryThunk } from '../../actions/PostAction';
+import { fetchPostsThunk, fetchPostCategoryThunk, loadPosts } from '../../actions/PostAction';
 
 const styles = theme => ({
     root: {
@@ -59,7 +59,21 @@ class PostsComponent extends Component {
         this.configureState();
     }
 
- 
+    sortDate = () => {
+        const { posts } = this.props;
+        const sort = posts.sort((a, b) => {
+            return a.timestamp - b.timestamp                
+        });
+        this.props.filter(sort);
+
+    }
+    sortVote = () => {
+        const { posts } = this.props;
+        const sort = posts.sort((a, b) => {
+            return a.voteScore - b.voteScore                
+        });
+        this.props.filter(sort);
+    }
     render() {
         const { posts, classes } = this.props;
         return (
@@ -98,6 +112,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadPosts: () => dispatch(fetchPostsThunk()),
         loadPostsCategory: cat => dispatch(fetchPostCategoryThunk(cat)),
+        filter: data => dispatch(loadPosts(data)),
     }
 }
 
