@@ -4,9 +4,9 @@ function post(state = [], action) {
 
     switch (action.type) {
         case LOAD_POSTS:
-            return action.data.filter(post => {
-                if (!post.deleted) return post;
-            });
+            return action.data.filter(post => (
+                !post.deleted
+            ));
         case CREATE_POST:
             return state.concat(action.data);
         default:

@@ -62,7 +62,7 @@ class PostsCreate extends Component {
         });
     };
 
-    onCategoryChange = (event) => {
+    onCategoryChange = (event) => {        
         const index = event.target.value;
         const cat = this.props.categories[index];
         this.setState({
@@ -73,7 +73,7 @@ class PostsCreate extends Component {
     createPost = () => {
         const id = uuid();
         const currentTime = moment().unix();
-        const { title, owner, category, body } = this.state;
+        const { title, owner, category, body } = this.state;        
         this.props.create({
             id: id,
             timestamp: currentTime,

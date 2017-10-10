@@ -35,22 +35,28 @@ class PostsComponent extends Component {
         });
     }
 
-    getData() {
-        const typeCat = this.state.type;
-        if (typeCat === 'posts') {
+    getData(cat) {
+        if (cat === 'posts') {
             this.props.loadPosts();
         } else {
-            this.props.loadPostsCategory(typeCat);
+            this.props.loadPostsCategory(cat);
         }
     }
-
+    componentWillReceiveProps(props) {
+        const cat = props.category.match.params.category;
+        if (cat !== this.state.type) {            
+            this.setState({
+                type: cat,
+            });
+            this.getData(cat);
+        }
+    }
     componentDidMount() {
-        this.getData();
-
+        const typeCat = this.state.type;
+        this.getData(typeCat);        
     }
     componentWillMount() {
         this.configureState();
-
     }
     render() {
         const { posts, classes } = this.props;
