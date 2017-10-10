@@ -69,9 +69,12 @@ class NavigationComponent extends Component {
                             <Route exact path='/create' render={() => (
                                 <PostsCreate />
                             )} />
+                            <Route path='/post/:id/edit' render={(id) => (
+                                <PostsCreate postId={id.match.params.id} />
+                            )} />
                             <Route path='/post/:id' render={(id) => (
                                 <PostsDetail postId={id} />
-                            )} />
+                            )} />                            
                             <Route path='/:category' render={(category) => (
                                 <PostsComponent category={category} />
                             )} />

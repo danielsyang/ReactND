@@ -7,13 +7,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
-import Input, { InputLabel } from 'material-ui/Input';
-import { MenuItem } from 'material-ui/Menu';
-import Select from 'material-ui/Select';
 import Button from 'material-ui/Button';
 
 import { fetchCategoriesThunk } from '../../actions/CategoryAction';
-import { createPostThunk } from '../../actions/PostAction';
+import { createPostThunk, getPostThunk } from '../../actions/PostAction';
 
 const styles = theme => ({
     root: {
@@ -32,13 +29,31 @@ const styles = theme => ({
 
 class PostsCreate extends Component {
     state = {
+        id: '',
         title: '',
         owner: '',
-        category: {},
+        category: '',
         body: '',
     }
     componentWillMount() {
         this.props.loadCategories();
+    }
+
+    componentDidMount() {
+        const idPost = this.props.postId;
+        if (idPost) {
+            this.setState({
+                id: idPost,
+            });
+            this.props.loadPost(idPost).then((response) => {                
+                this.setState({
+                    title: response.data.title,
+                    owner: response.data.author,
+                    body: response.data.body,
+                    category: response.data.category,
+                });
+            });
+        }
     }
 
     onTitleChange = (event) => {
@@ -62,18 +77,17 @@ class PostsCreate extends Component {
         });
     };
 
-    onCategoryChange = (event) => {        
-        const index = event.target.value;
-        const cat = this.props.categories[index];
+    onCategoryChange = (event) => {
+        const name = event.target.value;
         this.setState({
-            category: cat,
+            category: name,
         });
     };
 
     createPost = () => {
         const id = uuid();
         const currentTime = moment().unix();
-        const { title, owner, category, body } = this.state;        
+        const { title, owner, category, body } = this.state;
         this.props.create({
             id: id,
             timestamp: currentTime,
@@ -118,18 +132,12 @@ class PostsCreate extends Component {
                                 />
                             </Grid>
                             <Grid item xs={4}>
-                                <InputLabel htmlFor='category'>Category</InputLabel>
-                                <Select
-                                    value={this.state.category}
-                                    onChange={this.onCategoryChange}
-                                    input={<Input id='category' />} >
-                                    <MenuItem value=''>
-                                        <em>None</em>
-                                    </MenuItem>
+                                <select id='category' type='text' onChange={this.onCategoryChange}>
+                                    <option value=''>Pick one category</option>
                                     {categories.map((elem, index) => (
-                                        <MenuItem key={index} value={index}>{elem.name}</MenuItem>
+                                        <option key={index} value={elem.name}>{elem.name}</option>
                                     ))}
-                                </Select>
+                                </select>
                             </Grid>
 
                             <Grid item xs={12}>
@@ -160,6 +168,7 @@ class PostsCreate extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         loadCategories: () => (dispatch(fetchCategoriesThunk())),
+        loadPost: (id) => (dispatch(getPostThunk(id))),
         create: post => dispatch(createPostThunk(post)),
     }
 };
@@ -167,11 +176,13 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         categories: state.categories,
+        selectedPost: state.selectedPost,
     }
 };
 
 PostsCreate.propTypes = {
     classes: PropTypes.object.isRequired,
+    postId: PropTypes.string,
 };
 
 export default connect(
