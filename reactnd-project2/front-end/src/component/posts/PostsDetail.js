@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -11,7 +11,6 @@ import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import Divider from 'material-ui/Divider';
-import { withRouter } from 'react-router-dom';
 
 import CommentComponent from '../comments/CommentComponent';
 import CommentCreate from '../comments/CommentCreate';
@@ -97,7 +96,7 @@ class PostsDetail extends Component {
         const id = this.props.post.id;
         this.props.deletePost(id)
             .then(() => {
-                this.props.history.push('/posts');
+                this.props.history.push('/posts');                
             }).catch((erro) => {
                 console.log(erro);
                 console.log('Fuck');
@@ -109,7 +108,7 @@ class PostsDetail extends Component {
             comment: comment,
         });
         console.log(comment);
-        
+
     }
 
     convertTime = timestamp => moment(timestamp).format('DD-MM-YYYY');

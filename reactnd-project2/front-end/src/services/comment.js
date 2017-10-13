@@ -15,6 +15,11 @@ export const getCommentPost = id => (
         .then(res => res.json())
 );
 
+export const getCommentCount = id => (
+    fetch(`${api}/posts/` + id + `/comments`, { headers })
+        .then(res => res.json())        
+);
+
 export const createComment = comment => (
     fetch(`${api}/comments`, {
         method: 'POST',

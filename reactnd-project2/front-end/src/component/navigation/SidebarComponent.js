@@ -50,12 +50,12 @@ class SidebarComponent extends Component {
                 }}
             >
                 <div className={classes.drawerHeader} />
-                <ListItem button classes={{ root: classes.linkRoot, }} component={Link} to={'/'}>
+                <ListItem button classes={{ root: classes.linkRoot, }} component={Link} to={'/category'}>
                     <Icon>language</Icon>
                     <ListItemText primary='Categories' />
                 </ListItem>
                 <Divider />
-                <ListItem button classes={{ root: classes.linkRoot, }} component={Link} to={'/posts'}>
+                <ListItem button classes={{ root: classes.linkRoot, }} component={Link} to={'/'}>
                     <Icon>move_to_inbox</Icon>
                     <ListItemText primary='Posts' />
                 </ListItem>                

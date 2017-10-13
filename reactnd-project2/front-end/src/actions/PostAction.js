@@ -22,14 +22,14 @@ export const createPost = data => {
     }
 };
 
-export const getPost = data => {    
+export const getPost = data => {
     return {
         type: GET_POST,
         data,
     }
 };
 
-export const editPost = data => {    
+export const editPost = data => {
     return {
         type: EDIT_POST,
         data,
@@ -71,12 +71,14 @@ export const createPostThunk = post => dispatch => (
         .then(data => dispatch(createPost(data)))
 );
 
-export const editPostThunk = post => dispatch => {console.log('ásd'); return (
-    PostAPI
-        .editPost(post)
-        .then(res => res.json())
-        .then(data => dispatch(editPost(data)))
-)};
+export const editPostThunk = post => dispatch => {
+    return (
+        PostAPI
+            .editPost(post)
+            .then(res => res.json())
+            .then(data => dispatch(editPost(data)))
+    )
+};
 
 export const getPostThunk = id => dispatch => (
     PostAPI
@@ -111,8 +113,6 @@ export const deletePostThunk = id => dispatch => (
         .deletePost(id)
         .then(res => res.json())
         .then(data => {
-            console.log('vai tomar no cu');
-            console.log(data);
             return dispatch(deletePost(data))
         })
 )

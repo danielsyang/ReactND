@@ -26,7 +26,7 @@ const styles = theme => ({
         width: '100%',
         height: '100%',
     },
-    content: {        
+    content: {
         width: '100%',
         padding: theme.spacing.unit * 3,
         height: 'calc(100% - 56px)',
@@ -63,7 +63,10 @@ class NavigationComponent extends Component {
                     </Hidden>
                     <main className={classes.content}>
                         <Switch>
-                            <Route exact path='/' render={() => (
+                            <Route exact path='/' render={(category) => (
+                                <PostsComponent category={category} />
+                            )} />
+                            <Route exact path='/category' render={() => (
                                 <CategoryComponent />
                             )} />
                             <Route exact path='/create' render={() => (
@@ -74,7 +77,7 @@ class NavigationComponent extends Component {
                             )} />
                             <Route path='/post/:id' render={(id) => (
                                 <PostsDetail postId={id} />
-                            )} />                            
+                            )} />
                             <Route path='/:category' render={(category) => (
                                 <PostsComponent category={category} />
                             )} />

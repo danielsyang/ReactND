@@ -35,8 +35,8 @@ class PostsComponent extends Component {
         });
     }
 
-    getData(cat) {
-        if (cat === 'posts') {
+    getData(cat) {        
+        if (cat === 'posts' || cat === undefined) {
             this.props.loadPosts();
         } else {
             this.props.loadPostsCategory(cat);
@@ -75,7 +75,7 @@ class PostsComponent extends Component {
         this.props.filter(sort);
     }
     render() {
-        const { posts, classes } = this.props;
+        const { posts, classes } = this.props;        
         return (
             <div className={classes.root}>
                 <Grid container spacing={24}>
@@ -99,7 +99,7 @@ class PostsComponent extends Component {
                             Sort by: <Button dense onClick={this.sortVote}>Vote</Button><Button dense onClick={this.sortDate}>Date</Button>
                         </Grid>
 
-                        <PostsList posts={posts} />
+                        <PostsList posts={posts} filter={this.props.filter}/>
 
                     </Grid>
                 </Grid>

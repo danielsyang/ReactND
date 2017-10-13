@@ -2,7 +2,7 @@ import { GET_POST, UP_VOTE_POST, DOWN_VOTE_POST, DELETE_POST, EDIT_POST } from '
 
 function selectedPost(state = {}, action) {    
     switch (action.type) {
-        case DELETE_POST:
+        case DELETE_POST:            
         case GET_POST:
         case UP_VOTE_POST:
         case DOWN_VOTE_POST:
