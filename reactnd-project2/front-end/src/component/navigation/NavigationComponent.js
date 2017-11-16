@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Hidden from 'material-ui/Hidden';
+import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Hidden from 'material-ui/Hidden'
 
-import SidebarComponent from './SidebarComponent';
-import ToolbarComponent from './ToolbarComponent';
-import CategoryComponent from '../categories/CategoryComponent';
-import PostsComponent from '../posts/PostsComponent';
-import PostsCreate from '../posts/PostsCreate';
-import PostsDetail from '../posts/PostsDetail';
+import SidebarComponent from './SidebarComponent'
+import ToolbarComponent from './ToolbarComponent'
+import CategoryComponent from '../categories/CategoryComponent'
+import PostsComponent from '../posts/PostsComponent'
+import PostsCreate from '../posts/PostsCreate'
+import PostsDetail from '../posts/PostsDetail'
 
-const drawerWidth = 264;
+const drawerWidth = 264
 
 const styles = theme => ({
   root: {
@@ -39,18 +39,18 @@ const styles = theme => ({
       marginTop: 64,
     },
   },
-});
+})
 
 class NavigationComponent extends Component {
   state = {
     mobileOpen: false,
-  };
+  }
 
   handleDrawerToggle = () => {
-    this.setState({ mobileOpen: !this.state.mobileOpen });
-  };
+    this.setState({ mobileOpen: !this.state.mobileOpen })
+  }
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -85,7 +85,7 @@ class NavigationComponent extends Component {
           </main>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -93,4 +93,4 @@ NavigationComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(NavigationComponent);
+export default withStyles(styles)(NavigationComponent)

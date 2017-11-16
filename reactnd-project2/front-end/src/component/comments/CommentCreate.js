@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import uuid from 'uuid';
-import moment from 'moment';
-import { connect } from 'react-redux';
-import Grid from 'material-ui/Grid';
-import TextField from 'material-ui/TextField';
-import Typography from 'material-ui/Typography';
-import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import { withStyles } from 'material-ui/styles';
+import React, { Component } from 'react'
+import uuid from 'uuid'
+import moment from 'moment'
+import { connect } from 'react-redux'
+import Grid from 'material-ui/Grid'
+import TextField from 'material-ui/TextField'
+import Typography from 'material-ui/Typography'
+import PropTypes from 'prop-types'
+import Button from 'material-ui/Button'
+import { withStyles } from 'material-ui/styles'
 
-import { createCommentThunk, editCommentThunk } from '../../actions/CommentAction';
+import { createCommentThunk, editCommentThunk } from '../../actions/CommentAction'
 
 const styles = theme => ({
   typeContainer: {
@@ -24,7 +24,7 @@ const styles = theme => ({
     width: '25%',
     marginLeft: 'auto',
   }
-});
+})
 
 class CommentCreate extends Component {
   state = {
@@ -35,24 +35,24 @@ class CommentCreate extends Component {
   }
 
   onOwnerChange = (event) => {
-    const owner = event.target.value;
+    const owner = event.target.value
     this.setState({
       owner: owner,
     })
   }
 
   onBodyChange = (event) => {
-    const body = event.target.value;
+    const body = event.target.value
     this.setState({
       body: body,
     })
   }
 
   createComment = () => {
-    const id = uuid();
-    const currentTime = moment().unix();
-    const { owner, body } = this.state;
-    const { postId } = this.props;
+    const id = uuid()
+    const currentTime = moment().unix()
+    const { owner, body } = this.state
+    const { postId } = this.props
     this.props.createComment({
       id: id,
       timestamp: currentTime,
@@ -65,22 +65,22 @@ class CommentCreate extends Component {
         body: '',
       })
     }).catch((erro) => {
-      console.log(erro);
-    });;
+      console.log(erro)
+    })
   }
 
   editComment = () => {
-    const { owner, body, comment } = this.state;
-    const newComment = Object.assign(comment, { author: owner, body });
+    const { owner, body, comment } = this.state
+    const newComment = Object.assign(comment, { author: owner, body })
     this.props.editComment(newComment).then(() => {      
     }).catch(error => {
-      console.log(error);
+      console.log(error)
     })
 
   }
 
   componentDidUpdate() {
-    const newComment = this.props.comment;    
+    const newComment = this.props.comment    
 
     if (newComment !== undefined && newComment.id !== this.state.comment.id) {
       this.setState({
@@ -88,13 +88,13 @@ class CommentCreate extends Component {
         body: newComment.body,
         comment: newComment,
         edit: true,
-      });
+      })
     }    
   }
 
   render() {
-    const { classes } = this.props;
-    const { edit } = this.state;
+    const { classes } = this.props
+    const { edit } = this.state
     return (
       <Grid container spacing={24} className={classes.typeContainer}>
         {edit && <Typography>Edit Comment</Typography>}
@@ -133,7 +133,7 @@ const mapDispatchToProps = (dispatch) => {
     createComment: comment => (dispatch(createCommentThunk(comment))),
     editComment: comment => (dispatch(editCommentThunk(comment))),
   }
-};
+}
 
 const mapStateToProps = state => (
   {}
@@ -148,4 +148,4 @@ CommentCreate.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(CommentCreate));
+)(withStyles(styles)(CommentCreate))
