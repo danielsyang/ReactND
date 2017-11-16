@@ -61,7 +61,7 @@ export const deletePost = data => {
 export const fetchPostsThunk = () => dispatch => (
   PostAPI
     .get()
-    .then(res => res.json())    
+    .then(res => res.json())
     .then(data => {
       const newSet = []
       data.map(elem => {
@@ -113,14 +113,29 @@ export const upVotePostThunk = id => dispatch => (
   PostAPI
     .upVotePost(id)
     .then(res => res.json())
-    .then(data => dispatch(upVotePost(data)))
-)
+    .then(data => (
+      CommentAPI.getCommentCount(data.id)
+        .then(result => result.length)
+        .then(result => dispatch(upVotePost({
+          ...data,
+          numComment: result
+        })
+        ))
+    )
+    ))
 
 export const downVotePostThunk = id => dispatch => (
   PostAPI
     .downVotePost(id)
     .then(res => res.json())
-    .then(data => dispatch(downVotePost(data)))
+    .then(data => CommentAPI.getCommentCount(data.id)
+      .then(result => result.length)
+      .then(result => dispatch(downVotePost({
+        ...data,
+        numComment: result
+      })
+      ))
+    )
 )
 
 export const deletePostThunk = id => dispatch => (
