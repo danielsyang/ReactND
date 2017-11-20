@@ -1,23 +1,37 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
-}
+import CardComponent from './src/card'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-});
+})
+
+const decks = [
+  {
+    title: 'udacicards',
+    subtitle: '3 cards',
+  }, {
+    title: 'new deck',
+    subtitle: '0 cards',
+  }, {
+    title: 'New deck 2',
+    subtitle: '0 cards',
+  },
+
+]
+
+class App extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        {decks.map((elem, index) => (
+          <CardComponent title={elem.title} subtitle={elem.subtitle} key={index} />
+        ))}
+      </View>
+    )
+  }
+}
+
+export default App
