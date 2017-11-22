@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 import CardComponent from './src/card'
+import Stack from './src/stack-navigation/stackNavigation'
 
 const styles = StyleSheet.create({
   container: {
@@ -23,12 +24,13 @@ const decks = [
 ]
 
 class App extends Component {
-  render() {
+  render() {    
     return (
       <View style={styles.container}>
-        {decks.map((elem, index) => (
+        {/* {decks.map((elem, index) => (
           <CardComponent title={elem.title} subtitle={elem.subtitle} key={index} />
-        ))}
+        ))} */}
+        <Stack />        
       </View>
     )
   }
