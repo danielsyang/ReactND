@@ -37,7 +37,12 @@ class CardComponent extends Component {
   render() {
     const { title, subtitle, navigation } = this.props
     return (
-      <TouchableOpacity style={styles.body} onPress={() => navigation.navigate('Detail', {id: 'toGet'})}>
+      <TouchableOpacity style={styles.body} onPress={() => navigation.navigate('Detail',
+        {
+          name: title,
+          subtitle: subtitle,
+        }
+      )}>
         <View style={styles.titleView}>
           <Text style={styles.titleText}>{title}</Text>
         </View>

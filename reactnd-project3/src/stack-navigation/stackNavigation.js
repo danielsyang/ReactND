@@ -2,7 +2,7 @@ import React from 'react'
 import { StackNavigator } from 'react-navigation'
 
 import CardList from '../card/cardList'
-import CardDetail from '../card/cardDetail'
+import CardIndividual from '../card/cardIndividualView'
 
 const Stack = StackNavigator({
   Home: {
@@ -12,7 +12,7 @@ const Stack = StackNavigator({
     },
   },
   Detail: {
-    screen: CardDetail,
+    screen: CardIndividual,
   }
 })
 
