@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
 import CardList from '../card/cardList'
+import CardDetail from '../card/cardDetail'
 
 const Stack = StackNavigator({
   Home: {
@@ -11,6 +11,9 @@ const Stack = StackNavigator({
       title: 'Decks',
     },
   },
+  Detail: {
+    screen: CardDetail,
+  }
 })
 
 export default Stack

@@ -1,28 +1,30 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import {
   StyleSheet,
   Text,
-  View, 
+  View,
   TouchableOpacity
 } from 'react-native'
+// import LinearGradient from 'react-native-linear-gradient'
 
 const styles = StyleSheet.create({
+  linearGradient: {
+    flex: 1,
+  },
   body: {
     height: 150,
-    width: 250,
-    borderWidth: 1,
-    borderColor: '#c6c6c6',
-    borderRadius: 3,
+    alignSelf: 'stretch',
+    backgroundColor: '#ccccff',
   },
   titleView: {
     marginTop: 10,
-    borderBottomWidth: 1,
-    borderColor: '#c6c6c6',
   },
   titleText: {
     marginLeft: 10,
     marginBottom: 10,
+    fontWeight: '500',
+    color: '#fff',
   },
   description: {
     flex: 1,
@@ -33,9 +35,9 @@ const styles = StyleSheet.create({
 
 class CardComponent extends Component {
   render() {
-    const { title, subtitle } = this.props
+    const { title, subtitle, navigation } = this.props
     return (
-      <TouchableOpacity style={styles.body}>
+      <TouchableOpacity style={styles.body} onPress={() => navigation.navigate('Detail', {id: 'toGet'})}>
         <View style={styles.titleView}>
           <Text style={styles.titleText}>{title}</Text>
         </View>
@@ -50,6 +52,7 @@ class CardComponent extends Component {
 CardComponent.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
+  navigation: PropTypes.object.isRequired,
 }
 
 export default CardComponent;
