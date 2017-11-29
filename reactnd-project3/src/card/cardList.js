@@ -6,15 +6,28 @@ import CardComponent from './card'
 
 const decks = [
   {
-    title: 'udacicards',
-    subtitle: '3 cards',
-  }, {
-    title: 'new deck',
-    subtitle: '0 cards',
-  }, {
-    title: 'New deck 2',
-    subtitle: '0 cards',
+    title: 'React',
+    questions: [
+      {
+        question: 'What is React?',
+        answer: 'A library for managing user interfaces'
+      },
+      {
+        question: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event'
+      }
+    ]
   },
+  {
+    title: 'JavaScript',
+    questions: [
+      {
+        question: 'What is a closure?',
+        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+      }
+    ]
+  }
+
 ]
 
 const styles = StyleSheet.create({
@@ -31,7 +44,7 @@ class CardList extends Component {
     return (
       <View style={styles.container}>
         {decks.map((elem, index) => (
-          <CardComponent title={elem.title} subtitle={elem.subtitle} key={index} navigation={navigation}/>
+          <CardComponent title={elem.title} subtitle={elem.questions.length } key={index} navigation={navigation} />
         ))}
       </View>
     )

@@ -8,14 +8,16 @@ import {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 })
 
-class CardIndividual extends Component {
-  render() {
+class CardIndividualView extends Component {
+  render() {    
     return (
       <View style={styles.container}>
-        <Text>
+        <Text >
           {this.props.navigation.state.params.title}
         </Text>
         <Text>
@@ -26,4 +28,4 @@ class CardIndividual extends Component {
   }
 }
 
-export default CardIndividual
+export default CardIndividualView

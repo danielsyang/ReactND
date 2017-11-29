@@ -2,7 +2,7 @@ import React from 'react'
 import { StackNavigator } from 'react-navigation'
 
 import CardList from '../card/cardList'
-import CardIndividual from '../card/cardIndividualView'
+import CardIndividualView from '../card/cardIndividualView'
 
 const Stack = StackNavigator({
   Home: {
@@ -11,8 +11,11 @@ const Stack = StackNavigator({
       title: 'Decks',
     },
   },
-  Detail: {
-    screen: CardIndividual,
+  IndividualCard: {
+    screen: CardIndividualView,
+    navigationOptions: param => ({
+      title: `${param.navigation.state.params.name} Deck`
+    })
   }
 })
 
